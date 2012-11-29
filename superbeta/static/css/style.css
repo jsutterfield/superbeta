@@ -1,0 +1,199 @@
+
+
+header {
+  width: 960px;
+  margin: 0 auto;
+  position: relative;
+  margin-top: 2.5%;
+  color: #e6e6e6;
+}
+
+header h1 {
+  font-size: 5em;
+  float: left;
+  font-weight: bold;
+}
+
+header nav {
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+}
+
+header a {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+nav ul li {
+  display: inline;
+  margin-left: 90px;
+  color: #afafaf;
+}
+
+a {
+  text-decoration: none;
+}
+
+.gray-overlay {
+  padding-top: 25px;
+  margin-top: 25px;
+}
+
+.gray-overlay-holder {
+  width: 960px;
+  height: 270px;
+  background-color: white;
+  margin: 0 auto;
+}
+
+a:visited {
+  text-decoration: none;
+  color: #e6e6e6;
+
+}
+
+.gray-overlay {
+  width: 100%;
+  background-color: #929292;
+  height: 300px;
+}
+
+.hero {
+  width: 960px;
+  margin: 0 auto;
+  margin-top: 24px;
+}
+
+.left-hero {
+  float: left;
+  width: 340px;
+  height: 550px;
+}
+
+.left-hero-photo {
+  width: 160px;
+  height: 300px;
+  background-color: #d0cecf;
+  float: left;
+}
+
+.left-hero-text {
+  width: 160px;
+  float: right;
+  font-size: .85em;
+}
+
+.left-hero-text h4 {
+  margin: 0;
+}
+
+.left-hero-text p {
+  margin-top: 20px;
+}
+
+.google-map {
+  width: 100%;
+  height: 190px;
+  clear: both;
+  background-color: blue;
+  position: relative;
+  top: 40px;
+}
+
+.right-hero {
+  float: right;
+  background-color: #d0cecf;
+  height: 530px;
+  width: 565px;
+}
+
+footer {
+  width: 100%;
+  background-color: #242424;
+  color: #fdfdfd;
+  padding: 40px 0;
+}
+
+.footer-container {
+  width: 960px;
+  height: 240px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.footer-container div {
+  float: left;
+}
+
+.footer-container div:not(:first-child) {
+  margin-left: 50px;
+}​
+
+.footer-container div h4 {
+  font-weight: bold;
+}
+
+.far-left-footer {
+  width: 180px;
+  height: 240px;
+}
+
+.far-left-footer h3 {
+  font-size: 2.5em;
+}
+
+.footer-container div p {
+  margin-top: 20px;
+  font-size: .8em;
+}
+
+.far-left-footer p:nth-child(odd) {
+  margin-top: 6px;
+}
+
+.far-left-footer small {
+  position: absolute;
+  bottom: 0;
+  font-size: .75em;
+}
+
+.inner-left-footer {
+  width: 260px;
+}
+
+.inner-left-footer h4 {
+  font-weight: bold;
+}
+
+.inner-right-footer {
+  width: 145px;
+}
+
+.far-right-footer {
+  width: 225px;
+}
+
+footer div div h4 {
+  font-weight: bold;
+}
+
+.image {
+  width: 400px;
+}
+
+/* For modern browsers */
+.cf:before,
+.cf:after {
+    content:"";
+    display:table;
+}
+
+.cf:after {
+    clear:both;
+}
+
+/* For IE 6/7 (trigger hasLayout) */
+.cf {
+    *zoom:1;
+}

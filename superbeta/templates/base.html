@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href='{{ STATIC_URL }}css/normalize.css' rel='stylesheet'>
+    <link href='{{ STATIC_URL }}css/style.css' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <title>Superbeta | Climb on</title>
+    <!-- Syntax Highlighter -->
+    
+    <!-- Demo CSS -->
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/flexslider.css" type="text/css" media="screen" />
+    <!-- Modernizr -->
+    <script src="{{ STATIC_URL }}js/modernizr.js"></script>
+  </head>
+  <body>
+    <header class='cf'>
+      <h1>superbeta</h1>
+      <nav>
+        <ul>
+          <li><a href='#'>Climb on</a></li>
+          <li><a href='#'>Your climbs</a></li>
+          <li><a href='#'>About</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class='gray-overlay'>
+      <div class='gray-overlay-holder'>
+        {% block gray-overlay-content %}
+        {% endblock %}
+      </div>
+    </div>
+    {% block content %}
+    {% endblock %}
+    <footer>
+      <div class='footer-container cf'>
+        <div class='far-left-footer'>
+          <h3>superbeta</h3>
+          <p>123-456-7890</p>
+          <p>email@your address.com</p>
+
+          <p>123 Cool Road</p>
+          <p>Awesome town, State, 12345</p>
+
+          <small>Copyright 2012 Team Zombiru</small>
+        </div>
+        <div class='inner-left-footer'>
+          <h4>About SuperBeta&#9776&#9776&#9776&#9776&#9776&#9776&#9776&#9776</h4>
+          <p>Nunc venenatis eros nulla, ac elementum ante. Donec lacinia mauris ut orci cursus mattis. Aenean pretium libero laoreet metus congue posuere.</p> 
+          <p>Nulla sapien purus, rutrum at porta eget Nunc venenatis eros nulla, ac elementum ante. Donec lacinia mauris ut orci cursus mattis. Aenean pretium libero laoreet metus congue posuere.</p>
+        </div>
+        <div class='inner-right-footer'>
+          <h4>Link up&#9776&#9776&#9776&#9776&#9776&#9776</h4>
+          <p>Facebook</p>
+          <p>Twitter</p>
+        </div>
+        <div class='far-right-footer'>
+          <h4>@climbsuperbeta&#9776&#9776&#9776&#9776</h4>
+          <p>Nulla sapien purus, rutrum at porta eget</p>
+          <p>Nulla sapien purus, rutrum at porta eget</p>
+          <p>Nulla sapien purus, rutrum at porta eget</p>
+        </div>
+      </div>
+    </footer>
+    <section class="slider">
+        <div class="flexslider">
+          <ul class="slides">
+            <li>
+              <img src="{{ STATIC_URL }}images/kitchen_adventurer_cheesecake_brownie.jpg" />
+            </li>
+            <li>
+              <img src="{{ STATIC_URL }}images/kitchen_adventurer_lemon.jpg" />
+            </li>
+            <li>
+              <img src="{{ STATIC_URL }}images/kitchen_adventurer_donut.jpg" />
+            </li>
+            <li>
+              <img src="{{ STATIC_URL }}images/kitchen_adventurer_caramel.jpg" />
+            </li>
+          </ul>
+        </div>
+      </section>
+  </body>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.min.js">\x3C/script>')</script>
+  <script defer src="{{ STATIC_URL }}js/jquery.flexslider.js"></script>
+  <script type="text/javascript">
+    $(window).load(function(){
+      $('.flexslider').flexslider({
+        animation: "slide",
+        start: function(slider){
+          $('body').removeClass('loading');
+        }
+      });
+    });
+  </script>
+
+  <!-- Syntax Highlighter -->
+  <script type="text/javascript" src="{{ STATIC_URL }}js/shCore.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/shBrushXml.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/shBrushJScript.js"></script>
+  
+  <!-- Optional FlexSlider Additions -->
+  <script src="{{ STATIC_URL }}js/jquery.easing.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery.mousewheel.js"></script>
+  <script defer src="js/demo.js"></script>
+
+</html>
