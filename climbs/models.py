@@ -1,10 +1,11 @@
 from django.db import models 
 
 STAR_RATING = (
-    (1, "One Star"),
-    (2, "Two Star"),
-    (3, "Three Star"),
-    (4, "Four Star"),
+    # Look into having the first value be nums, not strings.
+    ('1', "One Star"),
+    ('2', "Two Star"),
+    ('3', "Three Star"),
+    ('4', "Four Star"),
 )
     
 class Route(models.Model):

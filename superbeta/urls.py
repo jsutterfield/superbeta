@@ -8,9 +8,10 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', 'superbeta.views.home', name='home'),
-    url(r'^routes/', include('climbs.urls')),
-    url(r'^pic$', 'superbeta.views.pic'),
+    (r'^$', 'superbeta.views.home'),
+    (r'^routes/', include('climbs.urls')),
+    (r'test/', 'superbeta.views.test' ),
+
     # url(r'^superbeta/', include('superbeta.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

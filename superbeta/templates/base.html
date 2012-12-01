@@ -11,23 +11,22 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/flexslider.css" type="text/css" media="screen" />
     <!-- Modernizr -->
     <script src="{{ STATIC_URL }}js/modernizr.js"></script>
+    {% block extra-head %}{% endblock %}
   </head>
   <body>
     <header class='cf'>
       <h1>superbeta</h1>
       <nav>
         <ul>
-          <li><a href='#'>Climb on</a></li>
-          <li><a href='#'>Your climbs</a></li>
+          <li><a href='/routes/mexico'>Climb on</a></li>
+          <li><a href='routes/tahoe'>Your climbs</a></li>
           <li><a href='#'>About</a></li>
         </ul>
       </nav>
     </header>
     <div class='gray-overlay'>
-      <div class='gray-overlay-holder'>
-        {% block gray-overlay-content %}
-        {% endblock %}
-      </div>
+      {% block gray-overlay-content %}
+      {% endblock %}
     </div>
     {% block content %}
     {% endblock %}
@@ -61,6 +60,7 @@
         </div>
       </div>
     </footer>
+    <!--
     <section class="slider">
         <div class="flexslider">
           <ul class="slides">
@@ -79,6 +79,7 @@
           </ul>
         </div>
       </section>
+    -->
   </body>
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
