@@ -80,10 +80,44 @@ a, a:visited {
 
 .gray-overlay-holder {
   width: 960px;
-  height: 270px;
-  background-color: #D0D0D0 ;
+  height: 274px;
+  background-color: #f6f6f6;
   margin: 0 auto;
   margin-top: 40px;
+}
+
+.three-featured-areas, .three-local-areas {
+  float: left;
+}
+
+.three-featured-areas {
+  height: 260px;
+  width: 675px;
+  position: relative;
+  top: 5px;
+  left: 5px;
+  border: 2px solid white;
+  margin-right: 8px;
+  background-color: #929292;
+}
+
+.three-local-areas {
+  height: 260px;
+  width: 265px;
+  background-color: #929292;
+  position: relative;
+  top: 5px;
+  border: 2px solid white;
+}
+
+.three-local-areas div:not(:first-child) {
+  margin-top: 3px;
+}
+
+.local-area {
+  width: 265px;
+  height: 85px;
+  background-color: olive;
 }
 
 .hero {
@@ -391,6 +425,25 @@ footer div div h4 {
 
 .image {
   width: 400px;
+}
+
+
+/***NIVO SLIDER*************************************/
+.nivoSlider {
+    position:relative;
+    background:url(images/loading.gif) no-repeat 50% 50%;
+}
+.nivoSlider img {
+    position:absolute;
+    top:0px;
+    left:0px;
+    display:none;
+    max-width: 675px;
+    max-height: 260px; 
+}
+.nivoSlider a {
+    border:0;
+    display:block;
 }
 
 /* For modern browsers */
