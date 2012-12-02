@@ -1,2 +1,5 @@
-Try displaying a page which lists the information for the route "Mexico"
-and shows all of the General photos related to that route
+fix the gray overlay and footer so that they stay on 
+the screen when the user scrolls in
+
+Make sure you are remaining consistent with measurement
+types (eg pixels, percentages, etc) ...
