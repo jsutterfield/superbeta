@@ -11,13 +11,14 @@
 
 body {
   font-family: Helvetica, sans-serif;
+  min-width: 1200px;
 }
 
 header {
   width: 960px;
   margin: 0 auto;
   position: relative;
-  margin-top: 2.5%;
+  margin-top: 1%;
   color: #e6e6e6;
 }
 
@@ -30,13 +31,17 @@ header h1 {
   left: 5px;
 }
 
+header h1 a {
+  color: #e6e6e6 !important;
+}
+
 header nav {
   position: absolute;
   bottom: 10px;
   right: 0;
 }
 
-header a {
+li a {
   font-size: 1.5em;
   font-weight: bold;
 }
@@ -56,6 +61,13 @@ a {
   margin: 0 auto;
 }
 
+
+a, a:visited {
+  text-decoration: none;
+  color: #afafaf;
+}
+
+/****INDEX********************************************************************************/
 .gray-overlay {
   width: 100%;
   background-color: #929292;
@@ -63,6 +75,7 @@ a {
   position: absolute;
   z-index: -1;
   margin-top: 25px;
+  min-width: 1200px;
 }
 
 .gray-overlay-holder {
@@ -70,13 +83,7 @@ a {
   height: 270px;
   background-color: #D0D0D0 ;
   margin: 0 auto;
-  margin-top: 50px;
-}
-
-a, a:visited {
-  text-decoration: none;
-  color: #afafaf;
-
+  margin-top: 40px;
 }
 
 .hero {
@@ -99,11 +106,17 @@ a, a:visited {
 .left-hero-text {
   width: 160px;
   float: right;
-  font-size: .85em;
+  font-size: .75em;
+  line-height: 1.5em;
+  color: #232323;
+  position: relative;
+  top: 5px;
 }
 
 .left-hero-text h4 {
   margin: 0;
+  font-weight: bold;
+  color: #929292;
 }
 
 .left-hero-text p {
@@ -231,6 +244,74 @@ a, a:visited {
   float: left;
 }
 
+.misc-details {
+  margin-bottom: 60px;
+  width: 220px;
+}
+
+.misc-details hgroup {
+  margin-bottom: 17px;
+}
+
+.misc-details h4, .misc-details-bold, .start-finish h4, .gallery h4 {
+  font-weight: bold;
+}
+
+.misc-details h4
+{
+  font-size: 1.1em;
+}
+
+.misc-details-reg {
+  float: right;
+  display: block;
+}
+
+.start-finish-img-frame {
+  height: 104px;
+  width: 204px;
+  background-color: #f6f6f6;
+  margin-bottom: 10px;
+}
+
+.start-finish-img {
+  height: 92px;
+  width: 192px;
+  background-color: #e6e6e6;
+  position: relative;
+  top: 4px;
+  left: 4px;
+  border: 2px solid white;
+}
+
+.start-finish h4 {
+  margin-bottom: 3px;
+}
+
+.gallery {
+  width: 220px;
+  margin-bottom: 100px;
+}
+
+.gallery-image-frame {
+  height: 52px;
+  width: 52px;
+  background-color: #f6f6f6;
+  float: left;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+.gallery-image {
+  height: 45px;
+  width: 45px;
+  background-color: #e6e6e6;
+  position: relative;
+  top: 2px;
+  left: 2px;
+  border: 2px solid white;
+}
+
 /***FOOTER********************************************************/
 footer {
   width: 100%;
@@ -238,8 +319,8 @@ footer {
   color: #fdfdfd;
   padding-top: 30px;
   padding-bottom: 20px;
-  margin-top: 100px;
   line-height: 1.25em;
+  min-width: 1200px;
 }
 
 .footer-container {
