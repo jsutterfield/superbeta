@@ -5,5 +5,8 @@ from django.http import HttpResponse
 def home(request):
     return render(request, 'index.html') 
 
-def test(request):
+def route(request):
     return render(request, 'route.html')
+
+def area(request):
+    return render(request, 'area.html')

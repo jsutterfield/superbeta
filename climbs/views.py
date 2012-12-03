@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from models import Route, Photo
+from models import Route, RoutePhoto
 
 def show_route(request, slug):
     route = Route.objects.get(slug=slug)

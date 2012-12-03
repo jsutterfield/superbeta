@@ -10,7 +10,8 @@ urlpatterns = patterns('',
     # Examples:
     (r'^$', 'superbeta.views.home'),
     (r'^routes/', include('climbs.urls')),
-    (r'test/', 'superbeta.views.test' ),
+    (r'route/', 'superbeta.views.route' ),
+    (r'area/', 'superbeta.views.area' ),
 
     # url(r'^superbeta/', include('superbeta.foo.urls')),
 

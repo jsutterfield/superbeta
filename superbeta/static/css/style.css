@@ -10,7 +10,7 @@
 }
 
 body {
-  font-family: Helvetica, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   min-width: 1200px;
 }
 
@@ -117,7 +117,7 @@ a, a:visited {
 .local-area {
   width: 265px;
   height: 85px;
-  background-color: olive;
+  background-color: #D0CECF;
 }
 
 .hero {
@@ -173,6 +173,39 @@ a, a:visited {
   width: 565px;
 }
 
+.about-app-holder div:not(:first-child) {
+  margin-top: 23px;
+}
+
+.about-app-holder {
+  width: 220px;
+  float: left;
+  margin-top: 25px;
+  margin-left: 35px;
+  margin-right: 40px;
+}
+
+.about-app-top, .about-app-main, .download-app {
+  background-color: white;
+}
+
+.about-app-top {
+  height: 57px;
+}
+
+.about-app-main {
+  height: 195px;
+}
+
+.download-app {
+  height: 110px;
+}
+
+.iphone-img {
+  margin-top: 15px;
+  width: 245px;
+}
+
 /***ROUTE*********************************************************/
 .route-pic-holder {
   height:880px; 
@@ -216,18 +249,36 @@ a, a:visited {
 
 }
 
+img.grade-backdrop {
+  width: 80px;
+  height: 93px;
+  position: absolute;
+  top: -35px;
+  z-index: -1;
+}
+
 .quick-info-pic-holder {
   color: white;
-  margin-top: 65px;
+  margin-top: 60px;
   width: 585px;
   float: left;
+  position: relative;
 }
 
 .quick-info-pic-holder h1 {
   font-size: 3.25em;
   position: relative;
   left: 95px;
+  bottom: 5px;
   font-family: 'BobelRegular';
+}
+
+.quick-info-pic-holder h2 {
+  font-size: 3em;
+  position: absolute;
+  left: 15px;
+  top: -5px;
+  font-weight: bold;
 }
 
 .quick-info-pic {
