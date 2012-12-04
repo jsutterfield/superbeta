@@ -225,6 +225,9 @@ a, a:visited {
 .route-pic {
   height: 590px;
   width: 340px;
+}
+
+div.route-pic {
   background-color: #e6e6e6;
   position: relative;
   top: 5px;
@@ -241,6 +244,9 @@ a, a:visited {
 .route-topo-pic {
   height: 220px;
   width: 340px;
+}
+
+div.route-topo-pic {
   background-color: #e6e6e6;
   position: relative;
   top: 5px;

@@ -16,7 +16,7 @@ class Route(models.Model):
     difficulty = models.CharField(max_length=15)
     description = models.TextField(blank=True)
     quality_rating = models.CharField(max_length=1, choices=STAR_RATING, blank=True)
-    height = models.IntegerField(null=True)
+    height = models.IntegerField(null=True, blank=True)
     weather = models.TextField(blank=True)
     history = models.TextField(blank=True)
     area = models.ForeignKey('Area')

@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="route-pic-holder">
+    <div class='route-pic-frame'>
+      <div class='route-pic'>
+        {% if topo %}
+          <img src="{{ topo.photo.url }}" class='route-pic' >
+        {% endif %}
+      </div>
+    </div>
+    <div class='route-topo-pic-frame'>
+      <div class='route-topo-pic'>
+        {% if overhead %}
+          <img src="{{ overhead.photo.url }}" class='route-topo-pic' >
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class='quick-info-pic-holder cf'>
+    <img src='{{ STATIC_URL }}images/grade-bldr.png' class='grade-backdrop'>
+    <h2>{{ route.difficulty }}</h2>
+    <h1>{{ route.name }}</h1>
+    <div class='quick-info-pics cf'>
+      <div class="quick-info-pic">
+      </div>
+      <div class="quick-info-pic">
+      </div>
+      <div class="quick-info-pic">
+      </div>
+    </div>
+  </div>
+  <div class="route-hero cf">
+    <hr>
+    <div class="route-description">
+      <p>
+      {{ route.description }}
+      </p>
+    </div>
+    <div class="route-details">
+      <div class="misc-details">
+        <hgroup>
+          <h4>Details for this route</h4>
+          <h4>by Enter user here</h4>
+        </hgroup>
+        <span class='misc-details-bold'>Author:</span>
+        <span class='misc-details-reg'>Richard Parker</span>
+        <br>
+        <span class='misc-details-bold'>Date:</span>
+        <span class='misc-details-reg'>December 15, 2011</span>
+        <br>
+        <span class='misc-details-bold'>Category:</span>
+        <span class='misc-details-reg'>Awsomeness</span>
+      </div>
+      <div class='start-finish'>
+        <h4>Start & Finish</h4>
+        <div class='start-finish-img-frame'>
+          <div class='start-finish-img'>
+          </div>
+        </div>
+        <div class='start-finish-img-frame'>
+          <div class='start-finish-img'>
+          </div>
+        </div>
+      </div>
+      <div class='gallery cf'>
+        <h4>Route pics</h4>
+        <div class='gallery-image-frame'>
+          <div class='gallery-image'>
+          </div>
+        </div>
+        <div class='gallery-image-frame'>
+          <div class='gallery-image'>
+          </div>
+        </div>
+        <div class='gallery-image-frame'>
+          <div class='gallery-image'>
+          </div>
+        </div>
+        <div class='gallery-image-frame'>
+          <div class='gallery-image'>
+          </div>
+        </div>
+        <div class='gallery-image-frame'>
+          <div class='gallery-image'>
+          </div>
+        </div>
+        <div class='gallery-image-frame'>
+          <div class='gallery-image'>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+<!--
+  <div style="height=600px; width=350px; background-color=white">
+  </div> -->
