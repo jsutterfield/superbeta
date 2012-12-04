@@ -397,6 +397,150 @@ img.grade-backdrop {
   border: 2px solid white;
 }
 
+/***AREA**********************************************************/
+.area-pic-holder {
+  margin: 0 auto;
+  margin-top: 40px;
+}
+
+.area-pic-frame, .area-quick-info-holder, .area-hero-left,
+.area-hero-middle, .area-hero-right {
+  float: left;
+}
+
+.area-pic-frame {
+  background-color: #f6f6f6;
+  width: 701px;
+  height: 270px;
+  margin-right: 25px;
+}
+
+.area-pic {
+  height: 256px;
+  width: 687px;
+  position: relative;
+  top: 5px;
+  left: 5px;
+  border: 2px solid white;
+  background-color: #929292;
+}
+
+.area-quick-info-holder div:not(:first-child) {
+  margin-top: 5px;
+}
+
+.area-quick-info-holder {
+  padding-top: 3px;
+}
+
+.area-quick-info {
+  width: 220px;
+  height: 85px;
+  background-color: #D0CECF;
+}
+
+.area-hero {
+  margin-top: 72px;
+  margin-bottom: 85px;
+}
+
+.area-hero-left {
+  width: 215px;
+  margin-right: 50px;
+}
+
+.area-details h4, .weather h4 {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.area-details hgroup {
+  margin-bottom: 17px;
+}
+
+.weather {
+  margin-top: 105px;
+}
+
+.weather-pic-holder {
+  height: 64px;
+  width: 203px;
+  background-color: #f6f6f6;
+  margin-top: 6px;
+  margin-bottom: 13px;
+}
+
+.weather-pic {
+  width: 193px;
+  height: 54px;
+  background-color: #ececec;
+  position: relative;
+  left: 3px;
+  top: 3px;
+  border: 2px solid white;
+}
+
+.area-hero-middle {
+  width: 430px;
+  margin-right: 50px
+}
+
+.area-hero-middle h4 {
+  font-weight: bold;
+}
+
+.area-hero-middle h4, .area-hero-middle p {
+  margin-bottom: 35px;
+}
+
+.area-hero-right {
+  width: 215px;
+}
+
+.classic-route-frame {
+  width: 57px;
+  height: 101px;
+  background-color: #f6f6f6; 
+  margin-right: 7px;
+  margin-top: 15px;
+  float: left;
+}
+
+.classic-route {
+  height: 91px;
+  width: 47px;
+  background-color: #ECECEC;
+  position: relative;
+  top: 3px;
+  left: 3px;
+  border: 2px solid white;
+}
+
+.route-approach {
+  margin-top: 43px;
+}
+
+.route-approach-img-frame {
+  height: 104px;
+  width: 204px;
+  background-color: #f6f6f6;
+  margin-bottom: 10px;
+}
+
+.route-approach-img {
+  height: 92px;
+  width: 192px;
+  background-color: #e6e6e6;
+  position: relative;
+  top: 4px;
+  left: 4px;
+  border: 2px solid white;
+}
+
+.route-approach h4 {
+  margin-bottom: 3px;
+}
+
 /***FOOTER********************************************************/
 footer {
   width: 100%;
@@ -472,12 +616,6 @@ footer {
 footer div div h4 {
   font-weight: bold;
 }
-/*******END FOOTER**********************************/
-
-.image {
-  width: 400px;
-}
-
 
 /***NIVO SLIDER*************************************/
 .nivoSlider {
