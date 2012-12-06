@@ -8,3 +8,7 @@ area page
 
 
 Look into having images removed when they are changed/deleted
+
+
+Change the slug field so that it displays the area/route using
+string substitution?

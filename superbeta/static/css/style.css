@@ -448,6 +448,8 @@ img.grade-backdrop {
 .area-hero {
   margin-top: 72px;
   margin-bottom: 85px;
+  font-size: 12px;
+  line-height: 1.5em;
 }
 
 .area-hero-left {
@@ -458,6 +460,7 @@ img.grade-backdrop {
 .area-details h4, .weather h4 {
   font-weight: bold;
   font-size: 1.1em;
+  color: #4C5059;
 }
 
 .area-details hgroup {
@@ -496,7 +499,8 @@ img.grade-backdrop {
 }
 
 .area-hero-middle h4, .area-hero-middle p {
-  margin-bottom: 35px;
+  color: #4C5053;
+  margin-bottom: 15px;
 }
 
 .area-hero-right {

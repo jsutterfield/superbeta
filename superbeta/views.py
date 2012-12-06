@@ -1,11 +1,28 @@
 from django.shortcuts import render_to_response
-from django.shortcuts import render
-from django.http import HttpResponse
-from climbs.models import Route
+from django.shortcuts import render, redirect
+from django.http import HttpResponse, Http404
+from climbs.models import Route, Area, RoutePhoto, AreaPhoto
+
 
 def home(request):
     return render(request, 'index.html') 
 
+def route(request, area_slug, route_slug):
+    route = None
+    topo = None
+    overhead = None
+    try:
+        a = Area.objects.get(slug=area_slug)
+        r = Route.objects.filter(area=a)
+        route = r.get(slug=route_slug)
+        topo = route.routephoto_set.filter(photo_type="T").get()
+        overhead = route.routephoto_set.filter(photo_type='C').get()
+    # Don't diaper bag here - be more specific
+    except:
+        raise Http404
+    return render(request, 'route2.html', {'route': route, 'topo': topo, 'overhead': overhead})
+
+"""
 def route(request, slug):
     exists = True
     topo = None
@@ -23,8 +40,13 @@ def route(request, slug):
         topo = route.routephoto_set.filter(photo_type="T").get()
         overhead = route.routephoto_set.filter(photo_type='C').get()
     return render(request, 'route2.html', {'route': route, 'topo': topo, 'overhead': overhead})
+"""
 
-def area(request):
+def area(request, area_slug):
+    try:
+        a = Area.objects.get(slug=area_slug)
+    except Area.DoesNotExist:
+        raise Http404
     return render(request, 'area.html')
 
 """

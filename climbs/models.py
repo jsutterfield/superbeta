@@ -40,11 +40,11 @@ class RoutePhoto(models.Model):
     
     # Figure out a better naming scheme for where the photos
     # are uploaded to
-    photo = models.ImageField(upload_to="photos")
     photo_type = models.CharField(max_length=1, choices=PHOTO_CHOICES)
     route = models.ForeignKey('Route')
     # Look into changing this field - chartype doesn't seem right
     quality_rating = models.CharField(max_length=1, choices=STAR_RATING, blank=True)
+    photo = models.ImageField(upload_to="photos")
 
     def __unicode__(self):
         return "%s-%s" % (self.route, self.photo_type)
@@ -59,6 +59,7 @@ class Area(models.Model):
     )
 
     name = models.CharField(max_length=100)
+    # Should we allow area to have the same name if in different States?
     slug = models.SlugField(unique=True)
     about = models.TextField(blank=True)
     parking_desc = models.TextField(blank=True)

@@ -9,9 +9,10 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     (r'^$', 'superbeta.views.home'),
-    (r'^routes/', include('climbs.urls')),
-    (r'^route/(?P<slug>.*)', 'superbeta.views.route' ),
-    (r'^area/', 'superbeta.views.area' ),
+    (r'^routes/$', include('climbs.urls')),
+    (r'^areas/(?P<area_slug>[\w_-]+)/$', 'superbeta.views.area'),
+    (r'^areas/(?P<area_slug>[\w_-]+)/(?P<route_slug>[\w_-]+)/$', 'superbeta.views.route' ),
+    
 
     # url(r'^superbeta/', include('superbeta.foo.urls')),
 
