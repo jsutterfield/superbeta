@@ -12,9 +12,7 @@ def route(request, area_slug, route_slug):
     topo = None
     overhead = None
     try:
-        a = Area.objects.get(slug=area_slug)
-        r = Route.objects.filter(area=a)
-        route = r.get(slug=route_slug)
+        route = Route.objects.filter(slug=route_slug).filter(area__slug=area_slug).get()
         topo = route.routephoto_set.filter(photo_type="T").get()
         overhead = route.routephoto_set.filter(photo_type='C').get()
     # Don't diaper bag here - be more specific

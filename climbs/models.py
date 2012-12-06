@@ -1,4 +1,5 @@
 from django.db import models 
+from autoslug import AutoSlugField
 
 STAR_RATING = (
     # Look into having the first value be nums, not strings.
@@ -12,7 +13,6 @@ STAR_RATING = (
 class Route(models.Model):
 
     name = models.CharField(max_length=100)
-    slug = models.SlugField(unique=True)
     difficulty = models.CharField(max_length=15)
     description = models.TextField(blank=True)
     quality_rating = models.CharField(max_length=1, choices=STAR_RATING, blank=True)
@@ -20,6 +20,7 @@ class Route(models.Model):
     weather = models.TextField(blank=True)
     history = models.TextField(blank=True)
     area = models.ForeignKey('Area')
+    slug = AutoSlugField(populate_from='name', unique_with='area__name')
 
 
     def __unicode__(self):
@@ -60,7 +61,7 @@ class Area(models.Model):
 
     name = models.CharField(max_length=100)
     # Should we allow area to have the same name if in different States?
-    slug = models.SlugField(unique=True)
+    slug = AutoSlugField(populate_from='name', unique=True)
     about = models.TextField(blank=True)
     parking_desc = models.TextField(blank=True)
     parking_gps = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
