@@ -21,10 +21,14 @@ class Route(models.Model):
     history = models.TextField(blank=True)
     area = models.ForeignKey('Area')
     slug = AutoSlugField(populate_from='name', unique_with='area__name')
+    featured = models.BooleanField(default=False)
 
 
     def __unicode__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return "/areas/%s/%s" % (self.area.slug, self.slug)
 
     def validate_rating(self):
         pass

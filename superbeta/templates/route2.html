@@ -4,16 +4,20 @@
   <div class="route-pic-holder">
     <div class='route-pic-frame'>
       <div class='route-pic'>
-        {% if topo %}
-          <img src="{{ topo.photo.url }}" class='route-pic' >
-        {% endif %}
+        {% for photo in photos %}
+          {% if photo.photo_type == "T" %}
+            <img src="{{ photo.photo.url }}" class='route-pic' >
+          {% endif %}
+        {% endfor %}
       </div>
     </div>
     <div class='route-topo-pic-frame'>
       <div class='route-topo-pic'>
-        {% if overhead %}
-          <img src="{{ overhead.photo.url }}" class='route-topo-pic' >
-        {% endif %}
+        {% for photo in photos %}
+          {% if photo.photo_type == "C" %}
+            <img src="{{ photo.photo.url }}" class='route-topo-pic' >
+          {% endif %}
+        {% endfor %}
       </div>
     </div>
   </div>
@@ -33,8 +37,9 @@
   <div class="route-hero cf">
     <hr>
     <div class="route-description">
+      <h4>Description</h4>
       <p>
-      {{ route.description }}
+        {{ route.description|linebreaks }}
       </p>
     </div>
     <div class="route-details">

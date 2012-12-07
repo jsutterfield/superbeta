@@ -26,17 +26,21 @@
   <div class='hero cf'>
     <div class='left-hero'>
       <div class='left-hero-photo'>
+        {% for photo in featured_photos %}
+          {% if photo.photo_type == "T" %}
+            <img src="{{ photo.photo.url }}" class='left-hero-photo'>
+          {% endif %}
+        {% endfor %}
       </div>
       <div class='left-hero-text'>
-        <h4>Featured route</h4>
-        <p>
-          Nunc venenatis eros nulla, ac elementum ante. Donec lacinia mauris ut orci cursus mattis. Aenean pretium libero laoreet metus congue posuere. Nulla sapien purus, rutrum at porta eget, viverra et nulla.
-        </p>
-        <p>
-          Nunc venenatis eros nulla, ac elementum ante. Donec lacinia mauris ut orci cursus mattis. Nulla sapien purus...
-        </p>
+        <a href="{{ featured_route.get_absolute_url }}">
+          <h4>{{ featured_route.name }}</h4>
+        </a>
+        <!--{{value|truncatechars:340}}-->
+        {{ featured_route.description|truncatechars:340 }}
       </div>
       <div class='google-map'>
+        <img src="http://maps.googleapis.com/maps/api/staticmap?center=san+francisco,ca&&zoom=6&size=340x190&sensor=false&maptype=terrain&key=AIzaSyCxg1BQiv1DusfAllPtM1R3u3INP6UEOb4">
       </div>
     </div>
     <div class='right-hero'>
@@ -52,3 +56,5 @@
     </div>
   </div>
 {% endblock %}
+
+http://maps.googleapis.com/maps/api/staticmap?center=san+francisco,ca&&zoom=12&size=340x190&sensor=false&key=AIzaSyCxg1BQiv1DusfAllPtM1R3u3INP6UEOb4

@@ -9,6 +9,9 @@ area page
 
 Look into having images removed when they are changed/deleted
 
+Look into using get_absolute_url methods for linking
+between pages
 
-Change the slug field so that it displays the area/route using
-string substitution?
+How should we handle what content to put in the bold
+for the descriptions? How exactly are we identifying
+that that?
