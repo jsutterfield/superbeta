@@ -2,12 +2,14 @@ from django.shortcuts import render_to_response
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
 from climbs.models import Route, Area, RoutePhoto, AreaPhoto
-from random import randint
+from random import choice
 
 def home(request):
-    featured_routes = Route.objects.filter(featured=True)
-    featured_route = featured_routes[randint(0, len(featured_routes) - 1)]
+    featured_route = choice(Route.objects.filter(featured=True))
+    featured_route.has_newline = False
     featured_photos = featured_route.routephoto_set.all()
+    if '\n' in featured_route.description[:420]:
+        featured_route.has_newline = True
     return render(request, 'index.html', {'featured_route': featured_route,
                                           'featured_photos': featured_photos}) 
 

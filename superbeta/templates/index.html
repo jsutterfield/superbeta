@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load paragraphs %}
 {% block content %}
   <div class='gray-overlay-holder cf'>
     <div class='three-featured-areas'>
@@ -36,8 +36,11 @@
         <a href="{{ featured_route.get_absolute_url }}">
           <h4>{{ featured_route.name }}</h4>
         </a>
-        <!--{{value|truncatechars:340}}-->
-        {{ featured_route.description|truncatechars:340 }}
+        {% if featured_route.has_newline %}
+          {{ featured_route.description|truncatechars:410|paragraphs }}
+        {% else %}
+          {{ featured_route.description|truncatechars:430|paragraphs }}
+        {% endif %}
       </div>
       <div class='google-map'>
         <img src="http://maps.googleapis.com/maps/api/staticmap?center=san+francisco,ca&&zoom=6&size=340x190&sensor=false&maptype=terrain&key=AIzaSyCxg1BQiv1DusfAllPtM1R3u3INP6UEOb4">

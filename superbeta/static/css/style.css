@@ -147,7 +147,7 @@ div.left-hero-photo {
   line-height: 1.5em;
   color: #232323;
   position: relative;
-  top: 5px;
+  top: 2px;
 }
 
 .left-hero-text h4 {
@@ -157,7 +157,7 @@ div.left-hero-photo {
 }
 
 .left-hero-text p {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .google-map {
