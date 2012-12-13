@@ -5,14 +5,16 @@
     <div class='three-featured-areas'>
       <div class="slider-wrapper theme-default">
         <div id="slider" class="nivoSlider">
-          <img src="http://127.0.0.1:8000/media/photos/vacaville-area.jpg" alt=""/>
-          <img src="http://127.0.0.1:8000/media/photos/area-mickeys-640x301.jpg" alt="" title="#htmlcaption" />
-          <img src="http://127.0.0.1:8000/media/photos/IMG_1077.JPG">
+          {% for photo in area_photos %}
+            <img src="{{ photo.photo.url }}" alt="" title="#{{ photo.area.slug }}"/>
+          {% endfor %}
         </div>
       </div>
-      <div id="htmlcaption" class="nivo-html-caption">
-        <strong>This</strong> is <em>Mickey's Beach</em>.
+      {% for photo in area_photos %}
+      <div id="{{ photo.area.slug }}" class="nivo-html-caption">
+        <a href="{{ photo.area.get_absolute_url }}"><strong>{{photo.area.name}}</strong></a>
       </div>
+      {% endfor %}
     </div>
     <div class='three-local-areas'>
       <div class='local-area'>
@@ -36,7 +38,9 @@
         <a href="{{ featured_route.get_absolute_url }}">
           <h4>{{ featured_route.name }}</h4>
         </a>
-        {% if featured_route.has_newline %}
+        {% if featured_route.has_multiple_newlines %}
+          {{ featured_route.description|truncatechars:360|paragraphs }}
+        {% elif featured_route.has_newline %}
           {{ featured_route.description|truncatechars:410|paragraphs }}
         {% else %}
           {{ featured_route.description|truncatechars:430|paragraphs }}

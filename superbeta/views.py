@@ -8,10 +8,15 @@ def home(request):
     featured_route = choice(Route.objects.filter(featured=True))
     featured_route.has_newline = False
     featured_photos = featured_route.routephoto_set.all()
-    if '\n' in featured_route.description[:420]:
-        featured_route.has_newline = True
+    if featured_route.description.count('\n', 0, 420) > 0:
+        if featured_route.description.count('\n', 0, 420) > 1:
+            featured_route.has_multiple_newlines = True
+        else:
+            featured_route.has_newline = True
+    area_photos = AreaPhoto.objects.filter(photo_type="G")
     return render(request, 'index.html', {'featured_route': featured_route,
-                                          'featured_photos': featured_photos}) 
+                                          'featured_photos': featured_photos,
+                                          'area_photos': area_photos}) 
 
 def route(request, area_slug, route_slug):
     route = None
@@ -25,34 +30,10 @@ def route(request, area_slug, route_slug):
 
 def area(request, area_slug):
     try:
-        a = Area.objects.get(slug=area_slug)
+        area = Area.objects.get(slug=area_slug)
+        photos = area.areaphoto_set.all()
+        routes = area.route_set.all()
+        classic_photos = RoutePhoto.objects.filter(route__area=area, photo_type="T") 
     except Area.DoesNotExist:
         raise Http404
-    return render(request, 'area.html')
-
-"""
-from routes.models import Route, Photo
-e = Route.objects.get(pk=1)
-p = e.photo_set.all()
-"""
-
-
-"""
-def route(request, slug):
-    exists = True
-    topo = None
-    overhead = None
-    if not slug:
-        return render(request, 'route.html')
-    else:
-        route = {'name': 'Not Found', 'difficulty': 'v0',
-                 'description': 'Sorry, %s was not found in the database, please try again.' % slug }
-        try:
-            route = Route.objects.get(slug=slug)
-        except Route.DoesNotExist:
-            exists = False
-    if exists:
-        topo = route.routephoto_set.filter(photo_type="T").get()
-        overhead = route.routephoto_set.filter(photo_type='C').get()
-    return render(request, 'route2.html', {'route': route, 'topo': topo, 'overhead': overhead})
-"""
+    return render(request, 'area.html', {'area': area, 'photos': photos, 'classic_photos': classic_photos})

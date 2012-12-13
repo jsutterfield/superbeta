@@ -68,15 +68,22 @@ class Area(models.Model):
     slug = AutoSlugField(populate_from='name', unique=True)
     about = models.TextField(blank=True)
     parking_desc = models.TextField(blank=True)
-    parking_gps = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    parking_gps_long = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    parking_gps_lat = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     approach_desc = models.TextField(blank=True)
+    approach_gps_long = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    approach_gps_lat = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     approach_rating = models.CharField(max_length=15, choices=APPROACH_CHOICES,
                                        blank=True)
     approach_length = models.TextField(blank=True)
+    weather = models.TextField(blank=True)
     misc = models.TextField(blank=True)
 
     def __unicode__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return "/areas/%s/" % self.slug
 
 
 class AreaPhoto(models.Model):

@@ -419,19 +419,25 @@ img.grade-backdrop {
 
 .area-pic-frame {
   background-color: #f6f6f6;
-  width: 701px;
-  height: 270px;
+  width: 689px;
+  height: 274px;
   margin-right: 25px;
 }
 
 .area-pic {
-  height: 256px;
-  width: 687px;
+  height: 260px;
+  width: 675px;
   position: relative;
   top: 5px;
   left: 5px;
   border: 2px solid white;
   background-color: #929292;
+}
+
+/*Does this need to be here???*/
+.area-pic img {
+  height: 260px;
+  width: 675px;
 }
 
 .area-quick-info-holder div:not(:first-child) {
@@ -511,8 +517,8 @@ img.grade-backdrop {
 }
 
 .classic-route-frame {
-  width: 57px;
-  height: 101px;
+  width: 62px;
+  height: 100px;
   background-color: #f6f6f6; 
   margin-right: 7px;
   margin-top: 15px;
@@ -520,13 +526,18 @@ img.grade-backdrop {
 }
 
 .classic-route {
-  height: 91px;
-  width: 47px;
+  height: 90px;
+  width: 52px;
   background-color: #ECECEC;
   position: relative;
   top: 3px;
   left: 3px;
   border: 2px solid white;
+}
+
+.classic-route img {
+  height: 90px;
+  width: 52px;
 }
 
 .route-approach {

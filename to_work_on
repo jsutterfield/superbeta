@@ -1,0 +1,14 @@
+Dealing with various photo sizes - particularly
+once users start adding content.
+
+What do with routes/areas that are added without 
+any photos - stock images, or maybe backgrounds
+asking people to upload images?
+
+Bread crumbs in the routes/areas
+
+Overall hierachy - State/Location/Area/Route?
+
+Dealing with difficulty overflow for routes
+
+Don't know if we need to have an author for an area
