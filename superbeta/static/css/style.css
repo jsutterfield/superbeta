@@ -399,6 +399,9 @@ img.grade-backdrop {
 .gallery-image {
   height: 45px;
   width: 45px;
+}
+
+div.gallery-image {
   background-color: #e6e6e6;
   position: relative;
   top: 2px;

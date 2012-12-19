@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 
+{% block extra-head %}
+  <script type="text/javascript" src="{{ STATIC_URL }}js/slimbox2.js"></script>
+  <link href='{{ STATIC_URL }}css/slimbox2.css' rel='stylesheet'>
+{% endblock %}
+
 {% block content %}
   <div class="route-pic-holder">
     <div class='route-pic-frame'>
@@ -70,8 +75,28 @@
       </div>
       <div class='gallery cf'>
         <h4>Route pics</h4>
-        <div class='gallery-image-frame'>
-          <div class='gallery-image'>
+        {% for photo in photos %}
+          {% if photo.photo_type == "G" %}
+            {% if forloop.counter > 7 %}
+              <div class='gallery-image-frame' style='display: none'>
+                <div class='gallery-image'>
+                  <a href="{{ photo.photo.url }}" rel="lightbox-gallery" title="my caption">
+                    <img src="{{ photo.photo.url }}" class='gallery-image' >
+                  </a>
+                </div>
+              </div>
+            {% else %}
+            <div class='gallery-image-frame'>
+                <div class='gallery-image'>
+                  <a href="{{ photo.photo.url }}" rel="lightbox-gallery" title="my caption">
+                    <img src="{{ photo.photo.url }}" class='gallery-image' >
+                  </a>
+                </div>
+              </div>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+          <!-- <div class='gallery-image'>
           </div>
         </div>
         <div class='gallery-image-frame'>
@@ -93,10 +118,11 @@
         <div class='gallery-image-frame'>
           <div class='gallery-image'>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
+  
 {% endblock %}
 
 <!--
