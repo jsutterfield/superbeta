@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load lessthan %}
 
 {% block extra-head %}
   <script type="text/javascript" src="{{ STATIC_URL }}js/slimbox2.js"></script>
@@ -77,8 +78,8 @@
         <h4>Route pics</h4>
         {% for photo in photos %}
           {% if photo.photo_type == "G" %}
-            {% if forloop.counter > 7 %}
-              <div class='gallery-image-frame' style='display: none'>
+            {% if forloop.counter|lt:8 %}
+              <div class='gallery-image-frame'>
                 <div class='gallery-image'>
                   <a href="{{ photo.photo.url }}" rel="lightbox-gallery" title="my caption">
                     <img src="{{ photo.photo.url }}" class='gallery-image' >
@@ -86,13 +87,7 @@
                 </div>
               </div>
             {% else %}
-            <div class='gallery-image-frame'>
-                <div class='gallery-image'>
-                  <a href="{{ photo.photo.url }}" rel="lightbox-gallery" title="my caption">
-                    <img src="{{ photo.photo.url }}" class='gallery-image' >
-                  </a>
-                </div>
-              </div>
+              <a href="{{ photo.photo.url }}" rel="lightbox-gallery" title="my caption" style="display: none"></a>
             {% endif %}
           {% endif %}
         {% endfor %}
