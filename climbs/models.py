@@ -23,7 +23,6 @@ class Route(models.Model):
     slug = AutoSlugField(populate_from='name', unique_with='area__name')
     featured = models.BooleanField(default=False)
 
-
     def __unicode__(self):
         return self.name
 

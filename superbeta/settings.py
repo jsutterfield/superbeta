@@ -122,9 +122,12 @@ INSTALLED_APPS = (
     'climbs',
     'south',
     'autoslug',
+    'users',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+AUTH_PROFILE_MODULE = 'users.UserProfile'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
