@@ -1,4 +1,0 @@
-python manage.py schemamigration appname --initial
-python manage.py migrate appname --fake
-python manage.py schemamigration appname --auto
-python manage.py migrate appname
