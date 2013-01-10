@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
 from climbs.models import Route, Area, RoutePhoto, AreaPhoto
 from random import choice
+import weather
 
 def home(request):
     featured_route = choice(Route.objects.filter(featured=True))
@@ -31,9 +32,16 @@ def route(request, area_slug, route_slug):
 def area(request, area_slug):
     try:
         area = Area.objects.get(slug=area_slug)
-        photos = area.areaphoto_set.all()
-        routes = area.route_set.all()
-        classic_photos = RoutePhoto.objects.filter(route__area=area, photo_type="T") 
     except Area.DoesNotExist:
         raise Http404
-    return render(request, 'area.html', {'area': area, 'photos': photos, 'classic_photos': classic_photos})
+    photos = area.areaphoto_set.all()
+    routes = area.route_set.all()
+    classic_photos = RoutePhoto.objects.filter(route__area=area, photo_type="T") 
+    weather_forecast = weather.get_forecast(city=area.closest_city, state=area.state)
+    return render(request, 'area.html', {'area': area, 'photos': photos, 'classic_photos': classic_photos, 
+                                         'weather': weather_forecast})
+
+def meta(request):
+    values = request.META.items()
+    values.sort()
+    return render(request, 'meta.html', {'values': values})

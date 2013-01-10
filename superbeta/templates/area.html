@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load icon_path %}
 
 {% block content %}
   <div class='area-pic-holder cf'>
@@ -48,14 +49,36 @@
         <span class='misc-details-bold'>Category:</span>
         <span class='misc-details-reg'>Awsomeness</span>
       </div>
-      <div class='weather'>
-        <h4>Current weather</h4>
-        <div class='weather-pic-holder'>
-          <div class='weather-pic'>
+      {% if weather %}
+        <div class='weather'>
+          <h4>Current weather</h4>
+          <div class='weather-pic-holder'>
+            <div class='weather-pic'>
+              <div class="weather-day">
+                <p>{{ weather.today.day }}</p>
+                <img src="{{STATIC_URL}}{{ weather.today.icon|icon_path }}">
+                <p class="weather-temp">{{ weather.today.temp }}°F</p>
+              </div>
+              <div class="weather-day">
+                <p>{{ weather.tomorrow.day }}</p>
+                <img src="{{STATIC_URL}}{{ weather.tomorrow.icon|icon_path }}">
+                <p class="weather-temp">{{ weather.tomorrow.temp }}°F</p>
+              </div>
+              <div class="weather-day">
+                <p>{{ weather.twodays.day }}</p>
+                <img src="{{STATIC_URL}}{{ weather.twodays.icon|icon_path }}">
+                <p class="weather-temp">{{ weather.twodays.temp }}°F</p>
+              </div>
+            </div>
           </div>
+          <a href="http://www.wunderground.com/?apiref=97953a28019c8232">
+            <img class="wunderground" src="{{STATIC_URL}}images/weather_images/wundergound_logo.jpg">
+          </a>
         </div>
-        <p>{{ area.weather }}</p>   
-      </div>
+      {% endif %}
+
+      <h4>When to Climb</h4>
+      <p>{{ area.weather }}</p>   
     </div>
     <div class='area-hero-middle'>
       <h4>About</h4>

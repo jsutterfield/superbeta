@@ -469,7 +469,7 @@ div.gallery-image {
   margin-right: 50px;
 }
 
-.area-details h4, .weather h4 {
+.area-details h4, .weather h4, .area-hero-left h4 {
   font-weight: bold;
   font-size: 1.1em;
   color: #4C5059;
@@ -484,21 +484,48 @@ div.gallery-image {
 }
 
 .weather-pic-holder {
-  height: 64px;
-  width: 203px;
+  height: 97px;
+  width: 196px;
   background-color: #f6f6f6;
   margin-top: 6px;
-  margin-bottom: 13px;
+  margin-bottom: 8px;
 }
 
 .weather-pic {
-  width: 193px;
-  height: 54px;
+  width: 186px;
+  height: 87px;
   background-color: #ececec;
   position: relative;
   left: 3px;
   top: 3px;
   border: 2px solid white;
+}
+
+.weather-day p {
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.weather-day p:not(:first-child) {
+  position: relative;
+  bottom: 12px;
+}
+
+.weather-day img {
+  margin-left: 7px;
+  position: relative;
+  bottom: 5px;
+}
+
+.weather-day {
+  float: left;
+  width: 62px;
+  margin-top: 5px;
+}
+
+.wunderground {
+  width: 200px;
+  margin-bottom: 35px;
 }
 
 .area-hero-middle {

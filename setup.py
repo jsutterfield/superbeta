@@ -11,7 +11,8 @@ setup(
         'Django==1.4.2',
         'South==0.7.6',
         'django-autoslug==1.6.1',
-        'PIL==1.1.7']
+        'PIL==1.1.7'
+        'requests==1.0.4']
 )
 
 

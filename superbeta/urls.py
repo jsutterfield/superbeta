@@ -13,7 +13,6 @@ urlpatterns = patterns('',
     (r'^areas/(?P<area_slug>[\w_-]+)/$', 'superbeta.views.area'),
     (r'^areas/(?P<area_slug>[\w_-]+)/(?P<route_slug>[\w_-]+)/$', 'superbeta.views.route' ),
     
-
     # url(r'^superbeta/', include('superbeta.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

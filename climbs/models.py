@@ -1,5 +1,7 @@
 from django.db import models 
 from autoslug import AutoSlugField
+from django.contrib.localflavor.us.models import USStateField
+from django.contrib.localflavor.us.models import USPostalCodeField
 
 STAR_RATING = (
     # Look into having the first value be nums, not strings.
@@ -22,6 +24,7 @@ class Route(models.Model):
     area = models.ForeignKey('Area')
     slug = AutoSlugField(populate_from='name', unique_with='area__name')
     featured = models.BooleanField(default=False)
+
 
     def __unicode__(self):
         return self.name
@@ -72,11 +75,12 @@ class Area(models.Model):
     approach_desc = models.TextField(blank=True)
     approach_gps_long = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     approach_gps_lat = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
-    approach_rating = models.CharField(max_length=15, choices=APPROACH_CHOICES,
-                                       blank=True)
+    approach_rating = models.CharField(max_length=15, choices=APPROACH_CHOICES, blank=True)
     approach_length = models.TextField(blank=True)
     weather = models.TextField(blank=True)
     misc = models.TextField(blank=True)
+    state = USStateField(blank=True, null=True)
+    closest_city = models.CharField(blank=True, null=True, max_length=30)
 
     def __unicode__(self):
         return self.name
