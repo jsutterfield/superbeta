@@ -27,7 +27,7 @@ def route(request, area_slug, route_slug):
         photos = route.routephoto_set.all()
     except:
         raise Http404
-    return render(request, 'route2.html', {'route': route, 'photos': photos})
+    return render(request, 'route.html', {'route': route, 'photos': photos})
 
 def area(request, area_slug):
     try:
@@ -40,8 +40,3 @@ def area(request, area_slug):
     weather_forecast = weather.get_forecast(city=area.closest_city, state=area.state)
     return render(request, 'area.html', {'area': area, 'photos': photos, 'classic_photos': classic_photos, 
                                          'weather': weather_forecast})
-
-def meta(request):
-    values = request.META.items()
-    values.sort()
-    return render(request, 'meta.html', {'values': values})
