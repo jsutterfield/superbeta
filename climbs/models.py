@@ -1,7 +1,6 @@
 from django.db import models 
 from autoslug import AutoSlugField
 from django.contrib.localflavor.us.models import USStateField
-from django.contrib.localflavor.us.models import USPostalCodeField
 
 STAR_RATING = (
     # Look into having the first value be nums, not strings.
@@ -81,6 +80,7 @@ class Area(models.Model):
     misc = models.TextField(blank=True)
     state = USStateField(blank=True, null=True)
     closest_city = models.CharField(blank=True, null=True, max_length=30)
+    zipcode = models.CharField(blank=True, null=True, max_length=10)    
 
     def __unicode__(self):
         return self.name
