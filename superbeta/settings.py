@@ -1,13 +1,18 @@
 # Django settings for superbeta project.
 import os
+import socket
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+if socket.gethostname() == 'jafaraf':
+    DEBUG = True
+    TEMPLATE_DEBUG = True
+else:
+    DEBUG = False
+    TEMPLATE_DEBUG = False
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 ADMINS = (
-    #('Your Name', 'your_email@example.com'),
+    ('James Sutterfield', 'james@zombiru.com'),
 )
 
 MANAGERS = ADMINS
