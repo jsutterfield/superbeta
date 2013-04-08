@@ -127,7 +127,6 @@ INSTALLED_APPS = (
     'climbs',
     'south',
     'autoslug',
-    'users',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )

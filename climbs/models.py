@@ -5,8 +5,8 @@ from django.contrib.localflavor.us.models import USStateField
 def save_area(instance, file_name):
     return "photos/%s/%s/%s" % (instance.area.state, instance.area.name, file_name)
 
-def save_route(instance, file_name):
-    return "photos/%s/%s/%s/%s" % (instance.route.parent.state, instance.route.parent.name, instance.route.name, file_name)
+def save_problem(instance, file_name):
+    return "photos/%s/%s/%s/%s" % (instance.problem.parent.state, instance.problem.parent.name, instance.problem.name, file_name)
 
 class Area(models.Model):
     AREA_CHOICES = (
@@ -22,7 +22,8 @@ class Area(models.Model):
     PARKING_TYPE = (
         ("L", "Lot"),
         ("S", "Street"),
-        ("G", "Garage")
+        ("G", "Garage"),
+        ("P", "Pullout")
     )
     name = models.CharField(max_length=100)
     area_type = models.CharField(max_length=2, choices=AREA_CHOICES)
@@ -68,8 +69,8 @@ class Area(models.Model):
         return "%s -- %s" % (self.name, self.state)
 
     
-class Route(models.Model):
-    ROUTE_QUALITY = (
+class Problem(models.Model):
+    PROBLEM_QUALITY = (
         # Look into having the first value be nums, not strings.
         ('1', "One Star"),
         ('2', "Two Star"),
@@ -87,19 +88,18 @@ class Route(models.Model):
     parent = models.ForeignKey('Area')
     featured = models.BooleanField(default=False)
     grade = models.CharField(max_length=6)
-    quality = models.CharField(max_length=1, choices=ROUTE_QUALITY, blank=True)
+    quality = models.CharField(max_length=1, choices=PROBLEM_QUALITY, blank=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     description = models.TextField(blank=True)
-    quality_rating = models.CharField(max_length=1, choices=ROUTE_QUALITY, blank=True)
     height = models.SmallIntegerField(null=True, blank=True)
     angle = models.CharField(max_length=1, choices=ANGLE_CHOICES, blank=True)
     features = models.CharField(max_length=40, blank=True)
     short_description = models.CharField(max_length=120, blank=True)
     about = models.TextField(blank=True)
     location = models.CharField(max_length=100, blank=True)
-    route_start = models.CharField(max_length=100, blank=True)
-    route_descent = models.CharField(max_length=100, blank=True)
+    problem_start = models.CharField(max_length=100, blank=True)
+    problem_descent = models.CharField(max_length=100, blank=True)
     landing_information = models.CharField(max_length=100, blank=True)
     hazard_information = models.CharField(max_length=100, blank=True)
     aspect = models.CharField(max_length=50, blank=True)
@@ -118,17 +118,17 @@ class Route(models.Model):
         pass
 
 
-class RoutePhoto(models.Model):
+class ProblemPhoto(models.Model):
     PHOTO_CHOICES = (
         ("O", "Overview"),
         ("G", "General")
     )
     photo_type = models.CharField(max_length=1, choices=PHOTO_CHOICES)
-    route = models.ForeignKey('Route')
-    photo = models.ImageField(upload_to=save_route)
+    problem = models.ForeignKey('Problem')
+    photo = models.ImageField(upload_to=save_problem)
 
     def __unicode__(self):
-        return "%s-%s" % (self.route, self.photo_type)
+        return "%s-%s" % (self.problem, self.photo_type)
 
 
 class AreaPhoto(models.Model):
