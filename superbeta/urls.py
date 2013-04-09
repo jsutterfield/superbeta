@@ -9,10 +9,11 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     (r'^$', 'superbeta.views.home'),
-    (r'^climbs/(?P<region_slug>[\w_-]+)/$', 'superbeta.views.region'),
-    (r'^climbs/(?P<region_slug>[\w_-]+)/(?P<area_slug>[\w_-]+)/$', 'superbeta.views.area'),
-    (r'^climbs/(?P<region_slug>[\w_-]+)/(?P<area_slug>[\w_-]+)/(?P<boulder_slug>[\w_-]+)/$', 'superbeta.views.boulder'),
-    (r'^climbs/(?P<region_slug>[\w_-]+)/(?P<area_slug>[\w_-]+)/(?P<boulder_slug>[\w_-]+)/(?P<route_slug>[\w_-]+)/$', 'superbeta.views.route'),
+    (r'^climbs/', include('superbeta.climbs.urls')),
+    # (r'^climbs/(?P<region_slug>[\w_-]+)/$', 'superbeta.views.region'),
+    # (r'^climbs/(?P<region_slug>[\w_-]+)/(?P<area_slug>[\w_-]+)/$', 'superbeta.views.area'),
+    # (r'^climbs/(?P<region_slug>[\w_-]+)/(?P<area_slug>[\w_-]+)/(?P<boulder_slug>[\w_-]+)/$', 'superbeta.views.boulder'),
+    # (r'^climbs/(?P<region_slug>[\w_-]+)/(?P<area_slug>[\w_-]+)/(?P<boulder_slug>[\w_-]+)/(?P<route_slug>[\w_-]+)/$', 'superbeta.views.route'),
     
     # url(r'^superbeta/', include('superbeta.foo.urls')),
 
