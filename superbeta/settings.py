@@ -114,6 +114,7 @@ WSGI_APPLICATION = 'superbeta.wsgi.application'
 
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT, 'templates'),
+    os.path.join(PROJECT_ROOT, '../climbs/templates')
 )
 
 INSTALLED_APPS = (

@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load icon_path %}
+
+{% block content %}
+  <div class='area-pic-holder cf'>
+    <div class='area-pic-frame'>
+        <div class='area-pic'>
+         {% for photo in photos %}
+            {% if photo.photo_type == "G" %}
+            <img src="{{ photo.photo.url }}">
+            {% endif %}
+          {% endfor %}
+          <!-- <div class="slider-wrapper theme-default">
+            <div id="slider" class="nivoSlider">
+              <img src="http://127.0.0.1:8000/media/photos/DSCN1172.JPG" alt="" />
+              <a href="http://dev7studios.com"><img src="images/slide2.jpg" alt="" title="#htmlcaption" /></a>
+              <img src="images/slide3.jpg" alt="" title="This is an example of a caption" />
+              <img src="images/slide4.jpg" alt="" />
+            </div>
+          </div>
+          <div id="htmlcaption" class="nivo-html-caption">
+            <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
+          </div> -->
+        </div>
+      </div>
+    <div class='area-quick-info-holder'>
+      <div class='area-quick-info'>
+      </div>
+      <div class='area-quick-info'>
+      </div>
+      <div class='area-quick-info'>
+      </div>
+    </div>
+  </div>
+
+  <div class="area-hero cf">
+    <div class='area-hero-left'>
+      <div class="area-details">
+        <hgroup>
+          <h4>Details for this route</h4>
+          <h4>by Enter user here</h4>
+        </hgroup>
+        <span class='misc-details-bold'>Author:</span>
+        <span class='misc-details-reg'>Richard Parker</span>
+        <br>
+        <span class='misc-details-bold'>Date:</span>
+        <span class='misc-details-reg'>December 15, 2011</span>
+        <br>
+        <span class='misc-details-bold'>Category:</span>
+        <span class='misc-details-reg'>Awsomeness</span>
+      </div>
+      {% if weather %}
+        <div class='weather'>
+          <h4>Current weather</h4>
+          <div class='weather-pic-holder'>
+            <div class='weather-pic'>
+              <div class="weather-day">
+                <p>{{ weather.today.day }}</p>
+                <img src="{{STATIC_URL}}{{ weather.today.icon|icon_path }}">
+                <p class="weather-temp">{{ weather.today.temp }}°F</p>
+              </div>
+              <div class="weather-day">
+                <p>{{ weather.tomorrow.day }}</p>
+                <img src="{{STATIC_URL}}{{ weather.tomorrow.icon|icon_path }}">
+                <p class="weather-temp">{{ weather.tomorrow.temp }}°F</p>
+              </div>
+              <div class="weather-day">
+                <p>{{ weather.twodays.day }}</p>
+                <img src="{{STATIC_URL}}{{ weather.twodays.icon|icon_path }}">
+                <p class="weather-temp">{{ weather.twodays.temp }}°F</p>
+              </div>
+            </div>
+          </div>
+          <a href="http://www.wunderground.com/?apiref=97953a28019c8232">
+            <img class="wunderground" src="{{STATIC_URL}}images/weather_images/wundergound_logo.jpg">
+          </a>
+        </div>
+      {% endif %}
+
+      <h4>When to Climb</h4>
+      <p>{{ area.weather }}</p>   
+    </div>
+    <div class='area-hero-middle'>
+      <h4>About</h4>
+      <p>
+      {{ area.about }}
+      </p>
+      <h4>Parking
+        {% if area.parking_gps_long and area.parking_gps_lat %}
+          --- {{ area.parking_gps_long }}, {{ area.parking_gps_lat }}
+        {% endif %}
+      </h4>
+      <p>
+      {{ area.parking_desc }}
+      </p>
+      <h4>Approach
+        <!-- Why is this happening!? -->
+        {% if area.parking_gps_long %}
+          {% if area.parking_gps_lat  %} 
+          --- {{ area.approach_gps_long }}, {{ area.approach_gps_lat }}
+          {% endif %}
+        {% endif %}
+      </h4>
+      <p>
+      {{ area.approach_desc }}
+      </p>
+      <h4>Miscellaneous</h4>
+      <p>
+      {{ area.misc }}
+      </p>
+    </div>
+    <div class='area-hero-right'>
+      <h4>Classic routes</h4>
+      <div class='classic-route-holder cf'>
+        {% for photo in classic_photos %}
+          <div class='classic-route-frame'>
+            <div class='classic-route'>
+              <a href="{{ photo.route.get_absolute_url }}">
+                <img src="{{ photo.photo.url }}" title="{{ photo.route.difficulty }} - {{ photo.route.name }}">
+              </a>
+            </div>
+          </div>  
+        {% endfor %}
+        <!-- <div class='classic-route-frame'>
+          <div class='classic-route'>
+          </div>
+        </div>
+        <div class='classic-route-frame'>
+          <div class='classic-route'>
+          </div>
+        </div>
+        <div class='classic-route-frame'>
+          <div class='classic-route'>
+          </div>
+        </div>
+        <div class='classic-route-frame'>
+          <div class='classic-route'>
+          </div>
+        </div>
+        <div class='classic-route-frame'>
+          <div class='classic-route'>
+          </div>
+        </div>
+        <div class='classic-route-frame'>
+          <div class='classic-route'>
+          </div>
+        </div> -->
+      
+      </div>
+      <div class='route-approach'>
+        <h4>How to get there</h4>
+        <div class='route-approach-img-frame'>
+          <div class='route-approach-img'>
+          </div>
+        </div>
+        <div class='route-approach-img-frame'>
+          <div class='route-approach-img'>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

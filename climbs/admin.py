@@ -1,22 +1,22 @@
 from django.contrib import admin
-from models import Route, RoutePhoto
+from models import Problem, ProblemPhoto
 from models import Area, AreaPhoto
 
 class AreaPhotoInline(admin.TabularInline):
     model = AreaPhoto
 
-class RoutePhotoInline(admin.TabularInline):
-    model = RoutePhoto
+class ProblemPhotoInline(admin.TabularInline):
+    model = ProblemPhoto
 
 class AreaAdmin(admin.ModelAdmin):
     inlines = [
         AreaPhotoInline
     ]
 
-class RouteAdmin(admin.ModelAdmin):
+class ProblemAdmin(admin.ModelAdmin):
     inlines = [
-        RoutePhotoInline
+        ProblemPhotoInline
     ]
 
 admin.site.register(Area, AreaAdmin)
-admin.site.register(Route, RouteAdmin)
+admin.site.register(Problem, ProblemAdmin)

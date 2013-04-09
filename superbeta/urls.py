@@ -9,7 +9,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     (r'^$', 'superbeta.views.home'),
-    (r'^climbs/', include('superbeta.climbs.urls')),
+    (r'^climbs/', include('climbs.urls')),
     # (r'^climbs/(?P<region_slug>[\w_-]+)/$', 'superbeta.views.region'),
     # (r'^climbs/(?P<region_slug>[\w_-]+)/(?P<area_slug>[\w_-]+)/$', 'superbeta.views.area'),
     # (r'^climbs/(?P<region_slug>[\w_-]+)/(?P<area_slug>[\w_-]+)/(?P<boulder_slug>[\w_-]+)/$', 'superbeta.views.boulder'),
