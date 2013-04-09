@@ -6,22 +6,22 @@ from random import choice
 import weather
 
 def home(request):
-    featured_Problem = None
+    featured_problem = None
     featured_photos = None
     area_photos = None
     try:
-        featured_Problem = choice(Problem.objects.filter(featured=True))
+        featured_problem = choice(Problem.objects.filter(featured=True))
     except IndexError:
         pass
-    if featured_Problem:
-        featured_Problem.has_newline = False
-        featured_photos = featured_Problem.Problemphoto_set.all()
-        if featured_Problem.description.count('\n', 0, 420) > 0:
-            if featured_Problem.description.count('\n', 0, 420) > 1:
-                featured_Problem.has_multiple_newlines = True
+    if featured_problem:
+        featured_problem.has_newline = False
+        featured_photos = featured_problem.problemphoto_set.all()
+        if featured_problem.description.count('\n', 0, 420) > 0:
+            if featured_problem.description.count('\n', 0, 420) > 1:
+                featured_problem.has_multiple_newlines = True
             else:
-                featured_Problem.has_newline = True
-        area_photos = AreaPhoto.objects.filter(photo_type="G")
-    return render(request, 'index.html', {'featured_Problem': featured_Problem,
+                featured_problem.has_newline = True
+    area_photos = AreaPhoto.objects.filter(area__area_type='AR', area__featured=True)
+    return render(request, 'index.html', {'featured_problem': featured_problem,
                                           'featured_photos': featured_photos,
                                           'area_photos': area_photos}) 

@@ -73,6 +73,16 @@ class Area(models.Model):
             return "%s -- %s -- %s -- %s" % (self.name, self.area_parent.name, 
                                              self.area_parent.area_parent.name, self.state)
 
+    def get_absolute_url(self):
+        if self.area_type == 'RE':
+            return "climbs/%s" % (self.slug)
+        elif self.area_type == 'AR':
+            return "climbs/%s/%s" % (self.area_parent.slug, self.slug)
+        else:
+            return "climbs/%s/%s/%s" % (self.area_parent.area_parent.slug,
+                                        self.area_parent.slug,
+                                        self.slug)
+
     
 class Problem(models.Model):
     PROBLEM_QUALITY = (
@@ -119,7 +129,9 @@ class Problem(models.Model):
                                          self.parent.area_parent.name, self.parent.state)
 
     def get_absolute_url(self):
-        return "/areas/%s/%s" % (self.area.slug, self.slug)
+        return "/climbs/%s/%s/%s/%s" % (self.parent.area_parent.area_parent.slug,
+                                        self.parent.area_parent.slug, 
+                                        self.parent.slug, self.slug)
 
     def validate_rating(self):
         pass
@@ -137,6 +149,9 @@ class ProblemPhoto(models.Model):
     def __unicode__(self):
         return "%s-%s" % (self.problem, self.photo_type)
 
+    def get_problem_url(self):
+        return self.problem.get_absolute_url()
+
 
 class AreaPhoto(models.Model):
     PHOTO_CHOICES = (
@@ -149,3 +164,6 @@ class AreaPhoto(models.Model):
 
     def __unicode__(self):
         return "%s-%s" % (self.area, self.photo_type)
+
+    def get_area_url(self):
+        return self.area.get_absolute_url()

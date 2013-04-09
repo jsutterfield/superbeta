@@ -5,14 +5,17 @@ from models import Area, AreaPhoto
 class AreaPhotoInline(admin.TabularInline):
     model = AreaPhoto
 
+
 class ProblemPhotoInline(admin.TabularInline):
     model = ProblemPhoto
+
 
 class AreaAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     inlines = [
         AreaPhotoInline
     ]
+
 
 class ProblemAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}

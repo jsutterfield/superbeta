@@ -6,13 +6,15 @@
       <div class="slider-wrapper theme-default">
         <div id="slider" class="nivoSlider">
           {% for photo in area_photos %}
-            <img src="{{ photo.photo.url }}" alt="" title="#{{ photo.area.slug }}"/>
+            <a href="{{ photo.get_area_url }}">
+              <img src="{{ photo.photo.url }}" alt="" title="#{{ photo.area.slug }}"/>
+            </a>
           {% endfor %}
         </div>
       </div>
       {% for photo in area_photos %}
       <div id="{{ photo.area.slug }}" class="nivo-html-caption">
-        <a href="{{ photo.area.get_absolute_url }}"><strong>{{photo.area.name}}</strong></a>
+        <a href="{{photo.get_area_url}}"><strong>{{photo.area.name}}</strong></a>
       </div>
       {% endfor %}
     </div>
@@ -29,21 +31,23 @@
     <div class='left-hero'>
       <div class='left-hero-photo'>
         {% for photo in featured_photos %}
-          {% if photo.photo_type == "T" %}
-            <img src="{{ photo.photo.url }}" class='left-hero-photo'>
+          {% if photo.photo_type == "O" %}
+            <a href="{{ featured_problem.get_absolute_url }}">
+              <img src="{{ photo.photo.url }}" class='left-hero-photo'>
+            </a>
           {% endif %}
         {% endfor %}
       </div>
       <div class='left-hero-text'>
-        <a href="{{ featured_route.get_absolute_url }}">
-          <h4>{{ featured_route.name }}</h4>
+        <a href="{{ featured_problem.get_absolute_url }}">
+          <h4>{{ featured_problem.name }}</h4>
         </a>
-        {% if featured_route.has_multiple_newlines %}
-          {{ featured_route.description|truncatechars:360|paragraphs }}
-        {% elif featured_route.has_newline %}
-          {{ featured_route.description|truncatechars:410|paragraphs }}
+        {% if featured_problem.has_multiple_newlines %}
+          {{ featured_problem.description|truncatechars:360|paragraphs }}
+        {% elif featured_problem.has_newline %}
+          {{ featured_problem.description|truncatechars:410|paragraphs }}
         {% else %}
-          {{ featured_route.description|truncatechars:430|paragraphs }}
+          {{ featured_problem.description|truncatechars:430|paragraphs }}
         {% endif %}
       </div>
       <div class='google-map'>
@@ -63,5 +67,3 @@
     </div>
   </div>
 {% endblock %}
-
-http://maps.googleapis.com/maps/api/staticmap?center=san+francisco,ca&&zoom=12&size=340x190&sensor=false&key=AIzaSyCxg1BQiv1DusfAllPtM1R3u3INP6UEOb4
