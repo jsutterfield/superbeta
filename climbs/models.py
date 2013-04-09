@@ -1,6 +1,5 @@
 from django.db import models 
-from autoslug import AutoSlugField
-from django.contrib.localflavor.us.models import USStateField
+from django.contrib.localflavor.us.models import USStateField, PhoneNumberField
 
 def save_area(instance, file_name):
     return "photos/%s/%s/%s" % (instance.area.state, instance.area.name, file_name)
@@ -26,21 +25,22 @@ class Area(models.Model):
         ("P", "Pullout")
     )
     name = models.CharField(max_length=100)
-    area_type = models.CharField(max_length=2, choices=AREA_CHOICES)
+    area_type = models.CharField(max_length=2, choices=AREA_CHOICES, 
+                help_text="eg 'Bay Area' = Region, 'Indian Rock' = Area, 'Motar Rock' = Boulder")
     area_parent = models.ForeignKey("self", null=True, blank=True)
     state = USStateField()
     city = models.CharField(max_length=20, blank=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     street_address = models.CharField(max_length=40, blank=True)
-    zipcode = models.SmallIntegerField(null=True, blank=True)
+    zipcode = models.IntegerField(null=True, blank=True)
     bouldering = models.BooleanField(default=False, blank=True)
     top_rope = models.BooleanField(default=False, blank=True)
     sport = models.BooleanField(default=False, blank=True)
     trad = models.BooleanField(default=False, blank=True)
     approach_difficulty = models.CharField(max_length=12, choices=APPROACH_CHOICES, blank=True)
-    approach_time = models.SmallIntegerField(null=True, blank=True)
-    approach_distance = models.SmallIntegerField(null=True, blank=True)
+    approach_time = models.IntegerField(null=True, blank=True, help_text="In minutes")
+    approach_distance = models.IntegerField(null=True, blank=True, help_text="In feet (1/4 mi = 1320ft, 1/2 mi = 2640ft, 1 mi = 5280ft)")
     approach_description = models.TextField(blank=True)
     trailhead_longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     trailhead_latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
@@ -48,7 +48,7 @@ class Area(models.Model):
     parking_longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     parking_latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     parking_description = models.CharField(max_length=750, blank=True)
-    height = models.SmallIntegerField(null=True, blank=True)
+    height = models.IntegerField(null=True, blank=True)
     short_description = models.CharField(max_length=120, blank=True)
     about = models.TextField(blank=True)
     description = models.TextField(blank=True)
@@ -60,13 +60,18 @@ class Area(models.Model):
     pet_friendly = models.BooleanField(default=False)
     nearest_emergency = models.CharField(max_length=25, blank=True)
     nearest_emergency_address = models.CharField(max_length=40, blank=True)
-    nearest_emergency_phone = models.SmallIntegerField(null=True, blank=True)
-    nearest_emergttency_two_address = models.CharField(max_length=40, blank=True)
-    slug = AutoSlugField(populate_from='name', unique_with='state')
+    nearest_emergency_phone = models.IntegerField(null=True, blank=True)
+    slug = models.SlugField(max_length=50)
     featured = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return "%s -- %s" % (self.name, self.state)
+        if self.area_type == 'RE':
+            return "%s -- %s" % (self.name, self.state)
+        elif self.area_type == 'AR':
+            return "%s -- %s -- %s" % (self.name, self.area_parent.name, self.state)
+        else:
+            return "%s -- %s -- %s -- %s" % (self.name, self.area_parent.name, 
+                                             self.area_parent.area_parent.name, self.state)
 
     
 class Problem(models.Model):
@@ -92,7 +97,7 @@ class Problem(models.Model):
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     description = models.TextField(blank=True)
-    height = models.SmallIntegerField(null=True, blank=True)
+    height = models.IntegerField(null=True, blank=True)
     angle = models.CharField(max_length=1, choices=ANGLE_CHOICES, blank=True)
     features = models.CharField(max_length=40, blank=True)
     short_description = models.CharField(max_length=120, blank=True)
@@ -107,9 +112,11 @@ class Problem(models.Model):
     misc_information = models.CharField(max_length=100, blank=True)
     first_ascent = models.CharField(max_length=20, blank=True)
     source = models.CharField(max_length=100, blank=True)
+    slug = models.SlugField(max_length=50, help_text='Used in URL to map to map to this route')
 
     def __unicode__(self):
-        return self.name
+        return "%s -- %s -- %s -- %s" % (self.name, self.parent.name,
+                                         self.parent.area_parent.name, self.parent.state)
 
     def get_absolute_url(self):
         return "/areas/%s/%s" % (self.area.slug, self.slug)
