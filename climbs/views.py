@@ -18,7 +18,7 @@ def area(request, region_slug, area_slug):
     except Area.DoesNotExist:
         raise Http404
     photos = area.areaphoto_set.all()
-    # problems = area.Problem_set.all()
+    # problems = area.problem_set.all()
     # classic_photos = ProblemPhoto.objects.filter(problem__area=area, photo_type="T") 
     weather_forecast = weather.get_forecast(lat=area.latitude, lon=area.longitude, 
                                             city=area.city, state=area.state, zipcode=area.zipcode)
@@ -40,7 +40,8 @@ def problem(request, region_slug, area_slug, boulder_slug, problem_slug):
                                       parent__area_parent__slug=area_slug).get()
     except Area.DoesNotExist:
         raise Http404
-    return HttpResponse('Welcome to %s!' % problem.name)
+    photos = problem.problemphoto_set.all()
+    return render(request, 'problem.html', {'problem': problem, 'photos': photos})
     # problem = None
     # photos = None
     # try:

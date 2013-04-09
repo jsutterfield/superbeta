@@ -112,7 +112,7 @@ class Problem(models.Model):
     misc_information = models.CharField(max_length=100, blank=True)
     first_ascent = models.CharField(max_length=20, blank=True)
     source = models.CharField(max_length=100, blank=True)
-    slug = models.SlugField(max_length=50, help_text='Used in URL to map to map to this route')
+    slug = models.SlugField(max_length=50, help_text='Used in URL to map to database to this route')
 
     def __unicode__(self):
         return "%s -- %s -- %s -- %s" % (self.name, self.parent.name,
