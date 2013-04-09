@@ -10,17 +10,6 @@
             <img src="{{ photo.photo.url }}">
             {% endif %}
           {% endfor %}
-          <!-- <div class="slider-wrapper theme-default">
-            <div id="slider" class="nivoSlider">
-              <img src="http://127.0.0.1:8000/media/photos/DSCN1172.JPG" alt="" />
-              <a href="http://dev7studios.com"><img src="images/slide2.jpg" alt="" title="#htmlcaption" /></a>
-              <img src="images/slide3.jpg" alt="" title="This is an example of a caption" />
-              <img src="images/slide4.jpg" alt="" />
-            </div>
-          </div>
-          <div id="htmlcaption" class="nivo-html-caption">
-            <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
-          </div> -->
         </div>
       </div>
     <div class='area-quick-info-holder'>
@@ -38,7 +27,6 @@
       <div class="area-details">
         <hgroup>
           <h4>Details for this route</h4>
-          <h4>by Enter user here</h4>
         </hgroup>
         <span class='misc-details-bold'>Author:</span>
         <span class='misc-details-reg'>Richard Parker</span>
@@ -47,7 +35,7 @@
         <span class='misc-details-reg'>December 15, 2011</span>
         <br>
         <span class='misc-details-bold'>Category:</span>
-        <span class='misc-details-reg'>Awsomeness</span>
+        <span class='misc-details-reg'>Awesomeness</span>
       </div>
       {% if weather %}
         <div class='weather'>
@@ -78,7 +66,7 @@
       {% endif %}
 
       <h4>When to Climb</h4>
-      <p>{{ area.weather }}</p>   
+      <p>{{ area.weather_description }}</p>   
     </div>
     <div class='area-hero-middle'>
       <h4>About</h4>
@@ -86,27 +74,24 @@
       {{ area.about }}
       </p>
       <h4>Parking
-        {% if area.parking_gps_long and area.parking_gps_lat %}
-          --- {{ area.parking_gps_long }}, {{ area.parking_gps_lat }}
+        {% if area.parking_longitude and area.parking_latitude %}
+          <span class="gps">({{ area.parking_latitude }}, {{ area.parking_longitude }})</span>
         {% endif %}
       </h4>
       <p>
-      {{ area.parking_desc }}
+      {{ area.parking_description }}
       </p>
       <h4>Approach
-        <!-- Why is this happening!? -->
-        {% if area.parking_gps_long %}
-          {% if area.parking_gps_lat  %} 
-          --- {{ area.approach_gps_long }}, {{ area.approach_gps_lat }}
-          {% endif %}
+        {% if area.trailhead_latitude and area.trailhead_longitude %}
+          <span class="gps">({{ area.trailhead_latitude }}, {{ area.trailhead_longitude }})</span>
         {% endif %}
       </h4>
       <p>
-      {{ area.approach_desc }}
+      {{ area.approach_description }}
       </p>
       <h4>Miscellaneous</h4>
       <p>
-      {{ area.misc }}
+      {{ area.misc_information }}
       </p>
     </div>
     <div class='area-hero-right'>

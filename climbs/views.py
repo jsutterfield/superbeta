@@ -17,11 +17,12 @@ def area(request, region_slug, area_slug):
         area = Area.objects.filter(slug=area_slug, area_parent__slug=region_slug).get()
     except Area.DoesNotExist:
         raise Http404
-    # photos = area.areaphoto_set.all()
+    photos = area.areaphoto_set.all()
     # problems = area.Problem_set.all()
     # classic_photos = ProblemPhoto.objects.filter(problem__area=area, photo_type="T") 
-    # weather_forecast = weather.get_forecast(city=area.closest_city, state=area.state)
-    return HttpResponse("Welcome to %s" % area.name)
+    weather_forecast = weather.get_forecast(lat=area.latitude, lon=area.longitude, 
+                                            city=area.city, state=area.state, zipcode=area.zipcode)
+    return render(request, 'area.html', {'area': area, 'photos': photos, 'weather': weather_forecast})
     # return render(request, 'area.html', {'area': area, 'photos': photos, 'classic_photos': classic_photos, 
     #                                      'weather': weather_forecast})
 
