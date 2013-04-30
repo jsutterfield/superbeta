@@ -20,7 +20,7 @@
     <div class='route-topo-pic-frame'>
       <div class='route-topo-pic'>
         {% for photo in photos %}
-          {% if photo.photo_type == "G" %}
+          {% if photo.photo_type == "T" %}
             <img src="{{ photo.photo.url }}" class='route-topo-pic' >
           {% endif %}
         {% endfor %}

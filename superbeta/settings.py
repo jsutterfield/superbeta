@@ -8,6 +8,8 @@ if socket.gethostname() == 'jafaraf':
 else:
     DEBUG = False
     TEMPLATE_DEBUG = False
+DEBUG = True
+TEMPLATE_DEBUG = True
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -20,8 +22,8 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'django_db',  # Or path to database file if using sqlite3.
-        'USER': 'django_login',                      # Not used with sqlite3.
+        'NAME': 'superbeta_db',  # Or path to database file if using sqlite3.
+        'USER': 'superbeta',                      # Not used with sqlite3.
         'PASSWORD': 'lurkingfear415',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
@@ -53,7 +55,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media/')
+MEDIA_ROOT = '/var/www/media' 
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -127,6 +129,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'climbs',
     'south',
+    "gunicorn",
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
