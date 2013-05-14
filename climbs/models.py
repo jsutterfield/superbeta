@@ -60,18 +60,18 @@ class Area(models.Model):
     pet_friendly = models.BooleanField(default=False)
     nearest_emergency = models.CharField(max_length=25, blank=True)
     nearest_emergency_address = models.CharField(max_length=40, blank=True)
-    nearest_emergency_phone = models.IntegerField(null=True, blank=True)
+    nearest_emergency_phone = PhoneNumberField(null=True, blank=True, help_text='XXX-XXX-XXXX')
     slug = models.SlugField(max_length=50)
     featured = models.BooleanField(default=False)
 
     def __unicode__(self):
         if self.area_type == 'RE':
-            return "%s -- %s" % (self.name, self.state)
+            return "%s -- %s" % (self.get_area_type_display(), self.name)
         elif self.area_type == 'AR':
-            return "%s -- %s -- %s" % (self.name, self.area_parent.name, self.state)
+            return "%s -- %s -- %s" % (self.get_area_type_display(), self.name, self.area_parent.name)
         else:
-            return "%s -- %s -- %s -- %s" % (self.name, self.area_parent.name, 
-                                             self.area_parent.area_parent.name, self.state)
+            return "%s -- %s -- %s -- %s" % (self.get_area_type_display(), self.name, self.area_parent.name, 
+                                             self.area_parent.area_parent.name)
 
     def get_absolute_url(self):
         if self.area_type == 'RE':
