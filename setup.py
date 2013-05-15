@@ -10,7 +10,8 @@ setup(
         'Django == 1.4.5',
         'South == 0.7.6',
         'PIL == 1.1.7',
-        'requests == 1.0.4']
+        'requests == 1.0.4',
+        'psycopg2==2.5',]
 )
 
 
