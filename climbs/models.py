@@ -18,12 +18,6 @@ class Area(models.Model):
         ("Intermediate", "Sneakers"),
         ("Difficult", "Boots")
     )
-    PARKING_TYPE = (
-        ("L", "Lot"),
-        ("S", "Street"),
-        ("G", "Garage"),
-        ("P", "Pullout")
-    )
     name = models.CharField(max_length=100)
     area_type = models.CharField(max_length=2, choices=AREA_CHOICES, 
                 help_text="eg 'Bay Area' = Region, 'Indian Rock' = Area, 'Motar Rock' = Boulder")
@@ -44,10 +38,6 @@ class Area(models.Model):
     approach_description = models.TextField(blank=True)
     trailhead_longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     trailhead_latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
-    parking_type = models.CharField(max_length=1, choices=PARKING_TYPE, blank=True)
-    parking_longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
-    parking_latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
-    parking_description = models.CharField(max_length=750, blank=True)
     height = models.IntegerField(null=True, blank=True)
     short_description = models.CharField(max_length=120, blank=True)
     about = models.TextField(blank=True)
@@ -82,6 +72,24 @@ class Area(models.Model):
             return "climbs/%s/%s/%s" % (self.area_parent.area_parent.slug,
                                         self.area_parent.slug,
                                         self.slug)
+
+
+class Parking(models.Model):
+    PARKING_TYPE = (
+        ("L", "Lot"),
+        ("S", "Street"),
+        ("G", "Garage"),
+        ("P", "Pullout")
+    )
+
+    parking_type = models.CharField(max_length=1, choices=PARKING_TYPE, blank=True)
+    area = models.ManyToManyField(Area)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    description = models.CharField(max_length=750, blank=True)
+
+    def __unicode__(self):
+        return self.parking_type
 
     
 class Problem(models.Model):
