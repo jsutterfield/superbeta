@@ -75,7 +75,8 @@
       </p>
       <h4>Parking
         {% if area.parking_longitude and area.parking_latitude %}
-          <span class="gps">({{ area.parking_latitude }}, {{ area.parking_longitude }})</span>
+        <a href="https://maps.google.com/maps?q=loc:{{ area.parking_latitude }},{{ area.parking_longitude
+            }}"><span class="gps">({{ area.parking_latitude }}, {{ area.parking_longitude }})</span></a>
         {% endif %}
       </h4>
       <p>
@@ -83,7 +84,9 @@
       </p>
       <h4>Approach
         {% if area.trailhead_latitude and area.trailhead_longitude %}
-          <span class="gps">({{ area.trailhead_latitude }}, {{ area.trailhead_longitude }})</span>
+        <a href="https://maps.google.com/maps?q=loc:{{ area.trailhead_latitude }},{{ area.trailhead_longitude }}">
+            <span class="gps">({{ area.trailhead_latitude }}, {{ area.trailhead_longitude }})</span>
+        </a>
         {% endif %}
       </h4>
       <p>

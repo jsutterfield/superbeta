@@ -43,6 +43,9 @@
   <div class="route-hero cf">
     <hr>
     <div class="route-description">
+    {% if problem.longitude and problem.latitude %}
+    <a href="https://maps.google.com/maps?q=loc:{{ problem.latitude }},{{ problem.longitude }}">({{ problem.latitude }}, {{ problem.longitude }})</a>
+    {% endif %}
       <h4>Description</h4>
       <p>
         {{ problem.description|linebreaks }}
