@@ -45,7 +45,7 @@ class Area(models.Model):
     parking_longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     parking_latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     parking_description = models.CharField(max_length=750, blank=True)
-    height = models.IntegerField(null=True, blank=True)
+    height = models.CharField(max_length=20, blank=True)
     short_description = models.CharField(max_length=120, blank=True)
     about = models.TextField(blank=True)
     description = models.TextField(blank=True)
