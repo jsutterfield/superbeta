@@ -104,7 +104,7 @@ class Problem(models.Model):
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     description = models.TextField(blank=True)
-    height = models.IntegerField(null=True, blank=True)
+    height = models.CharField(max_length=20, blank=True)
     angle = models.CharField(max_length=1, choices=ANGLE_CHOICES, blank=True)
     features = models.CharField(max_length=40, blank=True)
     short_description = models.CharField(max_length=120, blank=True)
