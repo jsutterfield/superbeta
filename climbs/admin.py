@@ -24,8 +24,9 @@ class AreaAdmin(admin.ModelAdmin):
             'parking_description']}),
         ('Climbing Info', {'fields': ['height', 'short_description', 'about',
             'description', 'rock_type']}),
-        ('Misc Info', {'fields': ['climbing_season', 'hazard_information',
-            'pet_friendly', 'nearest_emergency', 'nearest_emergency_address', 
+        ('Climbing Season', {'fields': ['spring', 'summer', 'fall', 'winter']}),
+        ('Misc Info', {'fields': ['hazard_information', 'pet_friendly', 
+            'nearest_emergency', 'nearest_emergency_address', 
             'nearest_emergency_phone', 'slug', 'featured']}),
         ]
 
