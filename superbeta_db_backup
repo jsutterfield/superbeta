@@ -1,0 +1,1652 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE TABLE auth_group (
+    id integer NOT NULL,
+    name character varying(80) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO superbeta;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: superbeta
+--
+
+CREATE SEQUENCE auth_group_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO superbeta;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: superbeta
+--
+
+ALTER SEQUENCE auth_group_id_seq OWNED BY auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE TABLE auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO superbeta;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: superbeta
+--
+
+CREATE SEQUENCE auth_group_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO superbeta;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: superbeta
+--
+
+ALTER SEQUENCE auth_group_permissions_id_seq OWNED BY auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE TABLE auth_permission (
+    id integer NOT NULL,
+    name character varying(50) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO superbeta;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: superbeta
+--
+
+CREATE SEQUENCE auth_permission_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO superbeta;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: superbeta
+--
+
+ALTER SEQUENCE auth_permission_id_seq OWNED BY auth_permission.id;
+
+
+--
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE TABLE auth_user (
+    id integer NOT NULL,
+    username character varying(30) NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(30) NOT NULL,
+    email character varying(75) NOT NULL,
+    password character varying(128) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    is_superuser boolean NOT NULL,
+    last_login timestamp with time zone NOT NULL,
+    date_joined timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.auth_user OWNER TO superbeta;
+
+--
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE TABLE auth_user_groups (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_groups OWNER TO superbeta;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: superbeta
+--
+
+CREATE SEQUENCE auth_user_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_groups_id_seq OWNER TO superbeta;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: superbeta
+--
+
+ALTER SEQUENCE auth_user_groups_id_seq OWNED BY auth_user_groups.id;
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: superbeta
+--
+
+CREATE SEQUENCE auth_user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_id_seq OWNER TO superbeta;
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: superbeta
+--
+
+ALTER SEQUENCE auth_user_id_seq OWNED BY auth_user.id;
+
+
+--
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE TABLE auth_user_user_permissions (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_user_permissions OWNER TO superbeta;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: superbeta
+--
+
+CREATE SEQUENCE auth_user_user_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_user_permissions_id_seq OWNER TO superbeta;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: superbeta
+--
+
+ALTER SEQUENCE auth_user_user_permissions_id_seq OWNED BY auth_user_user_permissions.id;
+
+
+--
+-- Name: climbs_area; Type: TABLE; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE TABLE climbs_area (
+    id integer NOT NULL,
+    name character varying(100) NOT NULL,
+    area_type character varying(2) NOT NULL,
+    area_parent_id integer,
+    state character varying(2) NOT NULL,
+    city character varying(20) NOT NULL,
+    longitude numeric(9,6),
+    latitude numeric(9,6),
+    street_address character varying(40) NOT NULL,
+    zipcode integer,
+    bouldering boolean NOT NULL,
+    top_rope boolean NOT NULL,
+    sport boolean NOT NULL,
+    trad boolean NOT NULL,
+    approach_difficulty character varying(12) NOT NULL,
+    approach_time integer,
+    approach_distance integer,
+    approach_description text NOT NULL,
+    trailhead_longitude numeric(9,6),
+    trailhead_latitude numeric(9,6),
+    short_description character varying(120) NOT NULL,
+    about text NOT NULL,
+    description text NOT NULL,
+    rock_type character varying(25) NOT NULL,
+    weather_description character varying(500) NOT NULL,
+    hazard_information character varying(750) NOT NULL,
+    misc_information character varying(750) NOT NULL,
+    pet_friendly boolean NOT NULL,
+    nearest_emergency character varying(50) NOT NULL,
+    nearest_emergency_address character varying(150) NOT NULL,
+    nearest_emergency_phone character varying(20),
+    slug character varying(50) NOT NULL,
+    featured boolean NOT NULL,
+    parking_longitude numeric(9,6),
+    parking_description text NOT NULL,
+    parking_latitude numeric(9,6),
+    lot_parking boolean NOT NULL,
+    street_parking boolean NOT NULL,
+    garage_parking boolean NOT NULL,
+    pullout_parking boolean NOT NULL,
+    height character varying(20) NOT NULL,
+    spring boolean NOT NULL,
+    summer boolean NOT NULL,
+    fall boolean NOT NULL,
+    winter boolean NOT NULL
+);
+
+
+ALTER TABLE public.climbs_area OWNER TO superbeta;
+
+--
+-- Name: climbs_area_id_seq; Type: SEQUENCE; Schema: public; Owner: superbeta
+--
+
+CREATE SEQUENCE climbs_area_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.climbs_area_id_seq OWNER TO superbeta;
+
+--
+-- Name: climbs_area_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: superbeta
+--
+
+ALTER SEQUENCE climbs_area_id_seq OWNED BY climbs_area.id;
+
+
+--
+-- Name: climbs_areaphoto; Type: TABLE; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE TABLE climbs_areaphoto (
+    id integer NOT NULL,
+    area_id integer NOT NULL,
+    photo character varying(100) NOT NULL,
+    photo_type character varying(1) NOT NULL
+);
+
+
+ALTER TABLE public.climbs_areaphoto OWNER TO superbeta;
+
+--
+-- Name: climbs_areaphoto_id_seq; Type: SEQUENCE; Schema: public; Owner: superbeta
+--
+
+CREATE SEQUENCE climbs_areaphoto_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.climbs_areaphoto_id_seq OWNER TO superbeta;
+
+--
+-- Name: climbs_areaphoto_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: superbeta
+--
+
+ALTER SEQUENCE climbs_areaphoto_id_seq OWNED BY climbs_areaphoto.id;
+
+
+--
+-- Name: climbs_problem; Type: TABLE; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE TABLE climbs_problem (
+    id integer NOT NULL,
+    name character varying(100) NOT NULL,
+    parent_id integer NOT NULL,
+    featured boolean NOT NULL,
+    grade character varying(6) NOT NULL,
+    quality character varying(1) NOT NULL,
+    longitude numeric(9,6),
+    latitude numeric(9,6),
+    description text NOT NULL,
+    angle character varying(1) NOT NULL,
+    features character varying(40) NOT NULL,
+    short_description character varying(120) NOT NULL,
+    about text NOT NULL,
+    location character varying(100) NOT NULL,
+    problem_start character varying(100) NOT NULL,
+    problem_descent character varying(100) NOT NULL,
+    landing_information character varying(100) NOT NULL,
+    hazard_information character varying(100) NOT NULL,
+    aspect character varying(50) NOT NULL,
+    variations character varying(100) NOT NULL,
+    misc_information character varying(100) NOT NULL,
+    first_ascent character varying(20) NOT NULL,
+    source character varying(100) NOT NULL,
+    slug character varying(50) NOT NULL,
+    height character varying(20) NOT NULL
+);
+
+
+ALTER TABLE public.climbs_problem OWNER TO superbeta;
+
+--
+-- Name: climbs_problem_id_seq; Type: SEQUENCE; Schema: public; Owner: superbeta
+--
+
+CREATE SEQUENCE climbs_problem_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.climbs_problem_id_seq OWNER TO superbeta;
+
+--
+-- Name: climbs_problem_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: superbeta
+--
+
+ALTER SEQUENCE climbs_problem_id_seq OWNED BY climbs_problem.id;
+
+
+--
+-- Name: climbs_problemphoto; Type: TABLE; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE TABLE climbs_problemphoto (
+    id integer NOT NULL,
+    photo_type character varying(1) NOT NULL,
+    problem_id integer NOT NULL,
+    photo character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.climbs_problemphoto OWNER TO superbeta;
+
+--
+-- Name: climbs_problemphoto_id_seq; Type: SEQUENCE; Schema: public; Owner: superbeta
+--
+
+CREATE SEQUENCE climbs_problemphoto_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.climbs_problemphoto_id_seq OWNER TO superbeta;
+
+--
+-- Name: climbs_problemphoto_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: superbeta
+--
+
+ALTER SEQUENCE climbs_problemphoto_id_seq OWNED BY climbs_problemphoto.id;
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE TABLE django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    user_id integer NOT NULL,
+    content_type_id integer,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO superbeta;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: superbeta
+--
+
+CREATE SEQUENCE django_admin_log_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO superbeta;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: superbeta
+--
+
+ALTER SEQUENCE django_admin_log_id_seq OWNED BY django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE TABLE django_content_type (
+    id integer NOT NULL,
+    name character varying(100) NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO superbeta;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: superbeta
+--
+
+CREATE SEQUENCE django_content_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO superbeta;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: superbeta
+--
+
+ALTER SEQUENCE django_content_type_id_seq OWNED BY django_content_type.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE TABLE django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO superbeta;
+
+--
+-- Name: django_site; Type: TABLE; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE TABLE django_site (
+    id integer NOT NULL,
+    domain character varying(100) NOT NULL,
+    name character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.django_site OWNER TO superbeta;
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE; Schema: public; Owner: superbeta
+--
+
+CREATE SEQUENCE django_site_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_site_id_seq OWNER TO superbeta;
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: superbeta
+--
+
+ALTER SEQUENCE django_site_id_seq OWNED BY django_site.id;
+
+
+--
+-- Name: south_migrationhistory; Type: TABLE; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE TABLE south_migrationhistory (
+    id integer NOT NULL,
+    app_name character varying(255) NOT NULL,
+    migration character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.south_migrationhistory OWNER TO superbeta;
+
+--
+-- Name: south_migrationhistory_id_seq; Type: SEQUENCE; Schema: public; Owner: superbeta
+--
+
+CREATE SEQUENCE south_migrationhistory_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.south_migrationhistory_id_seq OWNER TO superbeta;
+
+--
+-- Name: south_migrationhistory_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: superbeta
+--
+
+ALTER SEQUENCE south_migrationhistory_id_seq OWNED BY south_migrationhistory.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY auth_group ALTER COLUMN id SET DEFAULT nextval('auth_group_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY auth_permission ALTER COLUMN id SET DEFAULT nextval('auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY auth_user ALTER COLUMN id SET DEFAULT nextval('auth_user_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY auth_user_groups ALTER COLUMN id SET DEFAULT nextval('auth_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('auth_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY climbs_area ALTER COLUMN id SET DEFAULT nextval('climbs_area_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY climbs_areaphoto ALTER COLUMN id SET DEFAULT nextval('climbs_areaphoto_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY climbs_problem ALTER COLUMN id SET DEFAULT nextval('climbs_problem_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY climbs_problemphoto ALTER COLUMN id SET DEFAULT nextval('climbs_problemphoto_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY django_admin_log ALTER COLUMN id SET DEFAULT nextval('django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY django_content_type ALTER COLUMN id SET DEFAULT nextval('django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY django_site ALTER COLUMN id SET DEFAULT nextval('django_site_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY south_migrationhistory ALTER COLUMN id SET DEFAULT nextval('south_migrationhistory_id_seq'::regclass);
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: superbeta
+--
+
+COPY auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: superbeta
+--
+
+SELECT pg_catalog.setval('auth_group_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: superbeta
+--
+
+COPY auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: superbeta
+--
+
+SELECT pg_catalog.setval('auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: superbeta
+--
+
+COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add permission	1	add_permission
+2	Can change permission	1	change_permission
+3	Can delete permission	1	delete_permission
+4	Can add group	2	add_group
+5	Can change group	2	change_group
+6	Can delete group	2	delete_group
+7	Can add user	3	add_user
+8	Can change user	3	change_user
+9	Can delete user	3	delete_user
+10	Can add content type	4	add_contenttype
+11	Can change content type	4	change_contenttype
+12	Can delete content type	4	delete_contenttype
+13	Can add session	5	add_session
+14	Can change session	5	change_session
+15	Can delete session	5	delete_session
+16	Can add site	6	add_site
+17	Can change site	6	change_site
+18	Can delete site	6	delete_site
+19	Can add log entry	7	add_logentry
+20	Can change log entry	7	change_logentry
+21	Can delete log entry	7	delete_logentry
+22	Can add migration history	8	add_migrationhistory
+23	Can change migration history	8	change_migrationhistory
+24	Can delete migration history	8	delete_migrationhistory
+25	Can add area	9	add_area
+26	Can change area	9	change_area
+27	Can delete area	9	delete_area
+28	Can add problem	10	add_problem
+29	Can change problem	10	change_problem
+30	Can delete problem	10	delete_problem
+31	Can add problem photo	11	add_problemphoto
+32	Can change problem photo	11	change_problemphoto
+33	Can delete problem photo	11	delete_problemphoto
+34	Can add area photo	12	add_areaphoto
+35	Can change area photo	12	change_areaphoto
+36	Can delete area photo	12	delete_areaphoto
+37	Can add parking	13	add_parking
+38	Can change parking	13	change_parking
+39	Can delete parking	13	delete_parking
+\.
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: superbeta
+--
+
+SELECT pg_catalog.setval('auth_permission_id_seq', 39, true);
+
+
+--
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: superbeta
+--
+
+COPY auth_user (id, username, first_name, last_name, email, password, is_staff, is_active, is_superuser, last_login, date_joined) FROM stdin;
+1	james			james.sutterfield@gmail.com	pbkdf2_sha256$10000$swYDhnq0yN48$bCVFJSXxRfNFH+UIuazyyCgoIhaywzBb1dcQ/wzfqQs=	t	t	t	2013-05-31 00:09:14.219515-07	2013-05-14 16:25:29.898841-07
+\.
+
+
+--
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: superbeta
+--
+
+COPY auth_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: superbeta
+--
+
+SELECT pg_catalog.setval('auth_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: superbeta
+--
+
+SELECT pg_catalog.setval('auth_user_id_seq', 1, true);
+
+
+--
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: superbeta
+--
+
+COPY auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: superbeta
+--
+
+SELECT pg_catalog.setval('auth_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- Data for Name: climbs_area; Type: TABLE DATA; Schema: public; Owner: superbeta
+--
+
+COPY climbs_area (id, name, area_type, area_parent_id, state, city, longitude, latitude, street_address, zipcode, bouldering, top_rope, sport, trad, approach_difficulty, approach_time, approach_distance, approach_description, trailhead_longitude, trailhead_latitude, short_description, about, description, rock_type, weather_description, hazard_information, misc_information, pet_friendly, nearest_emergency, nearest_emergency_address, nearest_emergency_phone, slug, featured, parking_longitude, parking_description, parking_latitude, lot_parking, street_parking, garage_parking, pullout_parking, height, spring, summer, fall, winter) FROM stdin;
+1	East Bay	RE	\N	CA		\N	\N		\N	t	t	t	t		\N	\N		\N	\N		The majority of climbing in the East Bay Area can be found riddled throughout the Berkeley hills. Further East at Mount Diablo are a few more areas.						f			\N	east-bay	f	\N		\N	f	f	f	f	None	f	f	f	f
+5	North Bay	RE	\N	CA		\N	\N		\N	f	f	f	f		\N	\N		\N	\N								f			\N	north-bay	f	\N		\N	f	f	f	f	None	f	f	f	f
+43	Oahu	RE	\N	HI		\N	\N		\N	t	t	t	f		\N	\N		\N	\N								f				oahu	f	\N		\N	f	f	f	f	None	f	f	f	f
+48	The Pit	BO	2	CA	Berkeley	-122.273262	37.892178		\N	t	t	f	f	Easy	2	236	Head down the stairs from the street (right side) or around the back to the left til you see a wide clearing and tall walls. 	\N	\N	The main climbing area. 		Most routes can top out. You can down climb the Transportation Crack (VB), or walk off the back of Indian Rock.				There’s a hitch for dog leashes, and some rough low benches. 	t				pit	f	\N		\N	f	f	f	f	20	f	f	f	f
+49	Front crack rock	BO	2	CA	Berkeley	-122.272861	37.892273		\N	t	f	f	f	Easy	1	37	To the right of the warm-up wall.	\N	\N		The short boulder with a crack down the middle left.	Top out and walk off the back.			Bad landing to the right side, two large low rocks.		f				front-crack-rock	f	\N		\N	f	f	f	f	8	f	f	f	f
+39	Turtle Rock	BO	37	CA	Tiburon	-122.486851	37.913239		94920	t	t	f	f	Easy	10	1850	From the parking area, go through the gate on the right, follow the trail to the left of the houses and once you hit a fork in the road, take the path on the right down to Turtle Rock.	-122.486851	37.913239					Exposed on this North Bay hillside, so it can be very windy at times.			t				turtle-rock	f	\N		\N	f	f	f	f	None	f	f	f	f
+41	Woodcrest Boulders	AR	38	CA	Vacaville	-121.981080	38.377266	320 Woodcrest Dr	95688	t	f	f	f	Intermediate	20	1768	From the street, walk up the dirt service road behind the row of houses. At the main gate on the right, climb it and follow a dirt path up the hill. You'll see the boulders after about 100 yards.	-121.981080	38.377266	The first set of boulders off of the freeway.	Scenic open pastures above Woodcrest Drive. Popular hangout for local youth, so don't be surprised to see graffiti on the boulders. 	Highballs on hills. Careful with the landings, have extra spotters as some boulders are on slopes.					f				woodcrest-boulders	f	\N		\N	f	f	f	f	None	f	f	f	f
+42	Pegboard Wall	BO	2	CA	Berkeley	-122.273262	37.892178		\N	t	f	f	f	Easy	4	\N		\N	\N		The overhanging wall to the right of the main Pit, closer to the tree bench.	Lots of variations on these overhung routes.			Mostly clear landing, but narrow space and tree roots to the right.		t				pegboard-wall	f	\N		\N	f	f	f	f	15	f	f	f	f
+45	Bloody Madness	BO	41	CA	Vacaville	-121.986110	38.376306		\N	t	f	f	f	Easy	25	2356	Follow the trail left after the Stonewall boulder.	-121.981080	38.377266			Only a few routes, but there's a fun pumpy traverse.			This boulder is on a hillside, so have extra spotters to make sure you don't roll down the hill.		t				bloody-madness	f	\N		\N	f	f	f	f	12	f	f	f	f
+3	Warm-up Wall	BO	2	CA	Berkeley	-122.272861	37.892273		\N	t	f	f	f		1	37	From the street, locate the slabby boulder near the front water fountain.	\N	\N		The first slab wall you see from the street, to the left of the water fountain.						f				warm-up-wall	f	\N		\N	f	t	t	t	10	f	f	f	f
+50	Waimea Wall	BO	46	HI		-158.064302	21.638783		\N	t	f	f	f		8	\N		\N	\N			The routes vary from overhung to slabby and everything in between. There’s even a tube crack on one of the faces.					f				waimea-wall	f	\N		\N	f	f	f	f	20	f	f	f	f
+51	Hand Traverse	BO	4	CA		\N	\N		\N	t	f	f	f	Easy	\N	\N	This rock is on the West edge of the park, to the left after coming up the initial set of stairs.	\N	\N						Mostly clean landing, but there’s narrow space on the walkway and a large, low rock behind.		f				hand-traverse	f	\N		\N	f	f	f	f	10	f	f	f	f
+52	Lil Halfdome	BO	4	CA		\N	\N		\N	t	f	f	f	Easy	\N	\N	This rock is on the Northwest corner, closest to the street.	\N	\N		A short boulder on the North end of the park, slightly resembles Halfdome.						f				lil-halfdome	f	\N		\N	f	f	f	f	12	f	f	f	f
+53	The Corner	BO	2	CA	Berkeley	-122.272967	37.892420		\N	t	f	f	f	Easy	2	98	At the corner of San Mateo Dr. and Indian Rock Ave.	\N	\N		This undercut boulder is only about 10’ tall, but has a few fun ape-like moves to it.	Top out is a little tricky in some spots (read: directly into tree branches), however you can walk off the back, towards the Southwest.					f				corner	f	\N		\N	f	f	f	f	10	f	f	f	f
+54	Mortar Rock	BO	4	CA		-122.272494	37.893360		\N	t	f	f	f		5	\N		\N	\N		Another rock formation two blocks up the road from Indian Rock. Mortar Rock is named from the numerous holes in the rock used by Native Americans to grind acorns and such.	It has a number of tougher routes, but is less crowded and much sharper than Indian Rock.					t				mortar-rock	f	\N		\N	f	f	f	f	15	f	f	f	f
+55	East Traverse	BO	2	CA	Berkeley	-122.272195	37.892261		\N	t	f	f	f	Easy	3	200		\N	\N		Across the street from the main Indian Rock park is one more boulder, next to an open grassy lawn.	At about 12’ tall, this rock is mostly vertical and has clear landings all around. Walk off to the North. 					f				east-traverse	f	\N		\N	f	f	f	f		f	f	f	f
+4	Mortar Rock	AR	1	CA	Berkeley	-122.272494	37.893360	911 Indian Rock Avenue	94707	t	f	f	f	Easy	2	40	Walk up a few steps from the sidewalk and you're there.	-122.272494	37.893360	Sharp rocks just up the street from Indian Rock	Another rock formation two blocks up the road from Indian Rock. Mortar Rock is named from the numerous holes in the rock used by Native Americans to grind acorns and such. It has a number of tougher routes, but is less crowded and much sharper than Indian Rock. There are also two smaller climbable rocks nearby, The Hand Traverse Rock and Lil Halfdome. 			Year round climbing, but particularly great in the Spring and Fall.			t	Alta Bates Summit Medical	2450 Ashby Avenue Berkeley, CA 94705	\N	mortar-rock	t	\N		\N	f	f	f	f	None	t	t	t	t
+2	Indian Rock	AR	1	CA	Berkeley	-122.272655	37.892298	950 Indian Rock Avenue	94710	t	t	f	f	Easy	5	40	Super easy. Climbing areas are right off the road, less than a five minute walk unless you found a terrible parking spot.	-122.272655	37.892298	Old school training grounds in the Berkeley hills	A massive Northbrae rhyolite volcanic rock formation in the Berkeley Hills. Indian Rock is a popular hangout spot for locals interested in taking in the gorgeous panoramic view of the Bay from the top. There are stairs carved into the South face of the rock. 	Almost all of the problems are eliminates — routes where you can only use certain holds or moves. Most of the climbing is everywhere else: a slab area on the East face, the Pit has most of the routes on the West face, and some along the North edge as well.	Rhyolite	Year round climbing, but particularly great in the Spring and Fall. Not so great when it’s been raining recently.		Dog (and cat?) friendly. Occasional clouds of second-hand marijuana.	t	Alta Bates Summit Medical	2450 Ashby Avenue Berkeley, CA 94705	\N	indian-rock	t	\N		\N	f	f	f	f	None	t	t	t	t
+37	Ring Mountain	AR	5	CA	Tiburon	-122.486851	37.913239	351 Taylor Rd	94920	t	t	f	f	Easy	15	1853	Dirt trails and fire roads. Forward past the gate to the left leads to Split Rock. Up the narrow road to the right leads to Turtle Rock.	-122.486851	37.913239	A few boulders overlooking the Bay	Ring Mountain is an open space preserve in between Tiburon and Corte Madera, CA. It overlooks 360º views of the Bay: you can see almost every bridge from the peak. The area is home to many rare plants, like the Tiburon Mariposa Lilly.	A wide variety, from slabby to highball, on polished rock.	Schist	Being very high and having minimal tree cover, Ring Mountain is almost always windy, hot, or both. It’s usually above the low fog of the Bay, but the rock can be wet on damp days. Climbing is possible year round if it’s not raining. Bring layers as the wind can be chilly.		Elevation 603’. Gas and food are available within 2 mi. No camping allowed. No bathrooms or water.	t	Marin General Hospital	250 Bon Air Road, Greenbrae, CA 94904		ring-mountain	f	\N		\N	f	f	f	f	None	t	t	t	t
+38	Vacaville Boulders	RE	\N	CA	Vacaville	-121.981080	38.377266	320 Woodcrest Dr	95688	t	f	f	f	Easy	\N	\N		\N	\N	Backyard boulders in the cow-filled hills of the Vacaville suburbs.	Between the Bay Area and Sacramento, there are hills of boulders in the Vacaville suburbs. Mind the cows and cowpies.	All basalt, a wide range of easier problems. Boulders are mostly clean and there are some highballs. Landings can be awkward as some of the boulders are on hill slopes.	Basalt	Year round climbing, these rocks dry off fast since the boulders are all in the sun. Gets extra hot in the summer, though, as there is little to no tree cover.	Cow pies.	Dog and cow friendly.	t	Kaiser Permanente Vaca.	1 Quality Drive, Vacaville, CA 95688	707-624-4000	vacaville-boulders	f	\N		\N	f	f	f	f	None	t	t	t	t
+44	Wa'ahila Ridge	AR	43	HI	Honolulu	-157.812921	21.295952	2792 Dole St	96822	t	f	f	f	Easy	10	1078	Five minute walk to the trailheads depending on where you park. The trail to the North ridge starts on a dirt path behind a bus stop sign, at 21.295952,-157.812921. The trail to the Hurt Locker Boulders starts on the opposite side of the street and heads downstream.	-157.812921	21.295952	A few walls of sharp rock in the midst of UH Manoa campus	On a ridge overlooking the UH Manoa campus, there are a few walls of chossy rock. Some great problems and an excellent view from the North ridge. The South wall is downstream on the other side of the street. 	Most of the landings are flat and clear. These rocks are all Basalt, and very sharp.	Basalt	Pretty warm, but certain areas are in the shade at different times throughout the day.		Often times transient folks set up home here, so watch out for cardboard, trash, underwear, and unpleasant smells. Occasional clean-up days are hosted by local climbing groups.	t	Queen's Medical Center	1301 Punchbowl St, Honolulu, HI 96813	808-538-9011	waahila-ridge	f	\N		\N	f	f	f	f	None	t	t	t	t
+46	Waimea Bay	AR	43	HI	Haleiwa	-158.064302	21.638783	61-031 Kamehameha Hwy	96712	t	f	f	f	Easy	5	600	Less than five minutes from your car to the rock, unless the parking lot is full.	-158.062770	21.639324	Beach bouldering on Oahu's North Shore	Beach bouldering at it’s finest. Located on the North Shore of Oahu, Waimea Beach is an expanse of soft white sand, with a wall of black volcanic rock.	Highball problems galore	Basalt	Glorious Hawaii weather, most of the time. If it’s raining then the rocks are too slick to climb. If it’s super sunny, sometimes the rocks are too hot to hold.		The sand makes for a really soft landing, but check around the area first to be safe: I’ve seen random sharp objects and broken glass lurking just under the sand on occassion. You don’t necessarily need a crash pad, but have a spotter to be safe. Also, sand gets everywhere: bring a towel to wipe your shoes off on, and a brush to clear out some of the lower pockets.	t	Haleiwa Family Health Ctr	66-125 Kamehameha Hwy, Haleiwa, HI 96712	808-637-5087	waimea-bay	f	\N		\N	f	f	f	f	None	t	t	t	t
+47	Nuuanu Boulders	AR	43	HI	Honolulu	-157.846771	21.324120	2233 Nuuanu Avenue	96817	t	f	f	f	Easy	2	20	To the left of the shed, through the tall grass, there’s a footpath into the forest. You’ll see the top of Crocodile Boulder from the parking lot, so if you’ve walked more than a minute in and haven’t seen anything, you’re in the wrong spot. The entrance is right around 21.32412,-157.846771 and once inside, you’ll see various boulders to the left and right of the path. Watch out, near the beginning of the footpath there’s a low bar across the way that’s easy to trip on.	-157.846771	21.324120	Bouldering in the middle of Honolulu	These boulders are in a forest right off the Pali Highway. They’re right along a stream that feeds from Alapena pool. Quite a few problems, but many of the boulders get covered in moss when they’re not frequently used.	Mostly shorter problems with tricky moves.	Basalt		This place is mosquito central. Wear long sleeves and pants, or suffer the wrath.	Some of the problems get covered in moss, so bring a big brush or a brilo sponge and scrub off the areas you need before climbing. There’s also a lot of broken glass on the hill to the left of the path in the forest, so be careful and try to pick some up to dispose of on your way out.	t	Queen's Medical Center	1300 Punchbowl St, Honolulu, HI 96812	808-538-9010	nuuanu-boulders	f	\N		\N	f	f	f	f	None	t	t	t	t
+\.
+
+
+--
+-- Name: climbs_area_id_seq; Type: SEQUENCE SET; Schema: public; Owner: superbeta
+--
+
+SELECT pg_catalog.setval('climbs_area_id_seq', 55, true);
+
+
+--
+-- Data for Name: climbs_areaphoto; Type: TABLE DATA; Schema: public; Owner: superbeta
+--
+
+COPY climbs_areaphoto (id, area_id, photo, photo_type) FROM stdin;
+3	2	photos/CA/Indian Rock/IMG_6564.JPG	G
+4	4	photos/CA/Mortar Rock/IMG_6957.JPG	G
+\.
+
+
+--
+-- Name: climbs_areaphoto_id_seq; Type: SEQUENCE SET; Schema: public; Owner: superbeta
+--
+
+SELECT pg_catalog.setval('climbs_areaphoto_id_seq', 4, true);
+
+
+--
+-- Data for Name: climbs_problem; Type: TABLE DATA; Schema: public; Owner: superbeta
+--
+
+COPY climbs_problem (id, name, parent_id, featured, grade, quality, longitude, latitude, description, angle, features, short_description, about, location, problem_start, problem_descent, landing_information, hazard_information, aspect, variations, misc_information, first_ascent, source, slug, height) FROM stdin;
+2	Slab 2	3	f	v0	2	\N	\N	Follow good hand and foot holds toward the right.	S	Jugs				Stand start a third of the way from the left.		Slight positive incline.							slab-2	25
+23	The Overhang	48	f	V2	4	\N	\N	Climb directly up and left over the lip.	O	Jugs, arete, crimp, highball			The highpoint of the left wall.	Any of the low jugs.	Top out and walk off the back.		Highball.						overhang	15
+24	Center Overhang	48	f	V4	4	\N	\N	Climb directly up the middle towards the horn-shaped jug. Involves making a long reach from a small but good right hand sidepull.	O	Jug, sidepull, crimp, highball			The highpoint of the left wall.	Any of the low jugs.	Top out and walk off the back.		Highball.						center-overhang	18
+27	Easy Overhang	48	f	V0	2	\N	\N	Climb jugs directly up and top out.	O	Jug, highball			Above the juggy shelf on the left wall.	The juggy shelf.	Top out and walk off the back.								easy-overhang	16
+28	Embryonic Journey	48	f	V3	3	\N	\N	Mantle onto the slab and continue up through the birth canal.	S	Crimp, mantle, sloper		So named because you have to shimmy through a narrow canal at the end.	The middle cave area in the pit.	Start at the low end of the slab.	Top out and walk off the back.		Highball.						embryonic-journey	20
+3	Slab	3	t	v0	1	\N	\N	Climb straight up.	S	Crimps			This large warm up wall is south of the smaller stand-alone rock.	Stand start a third of the way from the left.	Top out and walk up toward the carved in stairs.	Slight positive incline.							slab	13
+4	Bloody Madness	45	f	V3	3	\N	\N		O				On the tallest part of the boulder.										bloody-madness	12
+5	Mantle practice	48	f	V1	2	\N	\N	Climb up using any holds. Mantle onto the shelf and step up without using any holds til you’re standing.	S	Mantle				Start anywhere to the right of the transpo crack.	Top out	Flat landing but there’s an exposed rock.							mantle-practice	15
+6	Pegboard	42	f	V1	3	\N	\N	Climb up small holds to a vertical jug, then top out.	O	Crimps, pinch			The overhanging wall closest to the tree, to the right.	Start at the large flake towards the bottom left.	Top out								pegboard	15
+7	Pegboard Arete	42	f	V0	1	\N	\N	Climb up along the left arête to a sloper top out.	O	Arete, sloper				Start at the large flake that is the base of Pegboard.	Top out	Flat & clear landing.							pegboard-arete	15
+8	Transportation crack	48	f	V0	2	\N	\N	Climb solid jugs to the top.		Jugs	The largest crack on the right wall.				Down climb					Used as the down climb for most routes in the Pit.			transportation-crack	15
+9	Warm-up traverse	3	f	V0	3	\N	\N	Traverse all the way right, then up.	S	Crimps, jugs				Start at the left of the wall.	Top out.	Slight positive incline.							warm-traverse	8
+10	Black Plague	4	f	v6		\N	\N	Climb up and over the bulge using slopers to the left and right.		Compression, crimp, sloper			The center bulge on the main area of Mortar Rock.	Start at two underclings directly below the bulge.									black-plague	None
+12	The crack	49	f	V2	2	-122.272861	37.892273	Climb using just your hands in the crack.		Crack			A smaller rock section to the right of the slab wall, on the East side of Indian Rock, with a vertic	Sit start with both hands at the bottom of the crack.	Top out and walk off the back of the boulder.	Clear landing.							crack	8
+11	C+ Dyno	48	f	V6		\N	\N	Lunge from the lower jug to the ending horn-shaped jug.	O	Dyno, jug			The left overhung wall in the Pit.	Climb up to the jug halfway up the wall.	Top out or drop down.								c-dyno	18
+13	Groove Tube	50	f	v0		\N	\N	Climb the groove-shaped tube starting from the base.		Crack						Be sure to protect the large block to the lower right if you have a pad.  							groove-tube	None
+14	Little prow	49	f	V2	2	\N	\N	Use anything but the crack to climb the face.					The arete to the right of the crack.	Sit start on the low crimp holds.	Top out and walk off the back of the boulder.	Bad landing, spot against the boulders to the right.							little-prow	8
+15	Front left	49	f	V1	2	\N	\N	Climb the left side of the front boulder using the left arete and face holds, not the crack.		Slopers			The arete to the left of the crack.		Top out.	Clean landing, but close to the left wall.							front-left	8
+16	Beginners' Slab	53	f	V0	1	\N	\N	Head directly up the middle of the boulder.	S						Top out.	Clear landing.							beginners-slab	8
+17	Easy ape	53	f	V1		\N	\N		O														easy-ape	7
+18	Ape overhang	53	f	V3	2	\N	\N		O														ape-overhang	7
+19	Ape traverse	53	f	V6	2	\N	\N																ape-traverse	7
+20	Watercourse	48	f	V2	3	\N	\N	Climb directly up the tall wall using sparse holds and polished feet.		Crimps, Highball			The center of the Pit, just right of the cave opening.	The slick wall beneath a mouth-like jug.	Top out.		Very highball.						watercourse	18
+21	Southpaw	50	f	V1		\N	\N	Follow the jugs up and right, along a slopey rail. Continue right until you’re at the bottom of the flat face. Climb up and over using the right crack, or using the smaller holds on the face for a V2 variant.	O				To the right of a small cave, on the overhung section of the wall.	Start on a set of low jugs, about 4’ up.		Sandy landing, but it's a high fall.							southpaw	None
+22	Kitty Cat	50	f	V0		\N	\N	Climb up along the corner to a flat ledge, then finish up and left to a top out.					Start on the first main corner of the wall, closer to the parking lot.	Sit start at a low large pocket.									kitty-cat	None
+29	Double Dyno	48	f	V3	2	\N	\N	Dyno or statically climb to the next two jugs.		Dyno, jug			The left side of the main right face in the Pit.	Sit start on the big jug.									double-dyno	15
+25	Right Overhang	48	f	V1	2	-122.272655	37.892298	Take the easier path of jugs and traverse to the lip from the right.	O	Jug, highball			The highpoint of the left wall.	The juggy shelf to the right.	Top out and walk off the back.		Highball.						right-overhang	18
+30	Beginners' crack	48	f	v0	3	\N	\N	Climb up using the crack.		Crack			Just right of the big jug on the right wall.			Highball.							beginners-crack	18
+31	Beginners' face	48	f	V1	2	\N	\N	Climb up without using either crack		Crimp, jug			Between the two cracks on the right wall.			Highball.							beginners-face	30
+26	Finger Machine Traverse	50	f	V2		\N	\N	Stay at about 4-5’ high and traverse to the right, all the way past three corners.		Pockets, crimps			The left most face of the wall.	Start at the left edge of the wall.									finger-machine-traverse	5
+32	Bench Wall Crack	4	f	V1	3	-122.272492	37.893310	Climb up and left along the crack.					On the right side of Mortar Rock, directly in front of the bench. 	Start at the low jugs.		Sketchy landing. The crux is at the top, and there’s an exposed rock to the left of the landing area							3789331	None
+33	The Bench Wall	4	f	V2	4	-122.272492	37.893310	Climb up the face in front of the bench, to the right of the crack. Lots of variations along this route.		Highball			On the right side of Mortar Rock, directly in front of the bench. 			Clear landing, but it’s a highball problem.							bench-wall	None
+34	Lil Halfdome Middle	52	f	V0		-122.272456	37.893473	Climb directly up the middle, lots of variations.					This rock is on the Northwest corner, closest to the street.	Sit start from small flakes.									lil-halfdome-middle	12
+35	The Hand Traverse	51	f	V1	4	-122.272519	37.893421	A traverse right-to-left along the top edge of the boulder. Traverse to the furthest left on that face above the stairs, then top out.						Start on the low right jugs.					For an even bigger challenge, require your hands to touch left to right with each move. It feels lik				hand-traverse	10
+36	The Mossy Arete	51	f	V1		\N	\N	Climb all the way up along the arete.					Above the steps to the left, green side of the rock.	Start at a low crimp.		Watch out for a few low boulders at the edge of the walkway, and there’re the stone steps to protect							mossy-arete	10
+37	Traverse	44	f	V3	2	\N	\N	Follow along a set of crimps and slopers to the right around a bulge, then climb up on the rightmost face of the wall.		Crimps, slopers, jugs				Start on a chest-level shelf towards the left of the wall.							Matt Lutey		traverse	8
+\.
+
+
+--
+-- Name: climbs_problem_id_seq; Type: SEQUENCE SET; Schema: public; Owner: superbeta
+--
+
+SELECT pg_catalog.setval('climbs_problem_id_seq', 37, true);
+
+
+--
+-- Data for Name: climbs_problemphoto; Type: TABLE DATA; Schema: public; Owner: superbeta
+--
+
+COPY climbs_problemphoto (id, photo_type, problem_id, photo) FROM stdin;
+9	O	3	photos/CA/Warm-up Wall/Slab/IMG_9711 (1)_1.jpg
+10	G	3	photos/CA/Warm-up Wall/Slab/IMG_9713.jpg
+11	G	3	photos/CA/Warm-up Wall/Slab/IMG_9711 (2).jpg
+\.
+
+
+--
+-- Name: climbs_problemphoto_id_seq; Type: SEQUENCE SET; Schema: public; Owner: superbeta
+--
+
+SELECT pg_catalog.setval('climbs_problemphoto_id_seq', 11, true);
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: superbeta
+--
+
+COPY django_admin_log (id, action_time, user_id, content_type_id, object_id, object_repr, action_flag, change_message) FROM stdin;
+1	2013-04-26 15:24:37.051354-07	1	9	1	East Bay -- CA	1	
+2	2013-04-26 15:28:13.965536-07	1	9	2	Indian Rock -- East Bay -- CA	1	
+3	2013-04-26 16:18:24.546079-07	1	9	3	Warm-up Wall -- Indian Rock -- East Bay -- CA	1	
+4	2013-04-26 16:20:19.788377-07	1	10	1	Slab -- Warm-up Wall -- Indian Rock -- CA	1	
+5	2013-04-26 16:21:45.009063-07	1	10	2	Slab 2 -- Warm-up Wall -- Indian Rock -- CA	1	
+6	2013-04-26 16:26:20.698389-07	1	9	2	Indian Rock -- East Bay -- CA	2	Added area photo "Indian Rock -- East Bay -- CA-G".
+7	2013-04-26 16:26:30.418301-07	1	9	2	Indian Rock -- East Bay -- CA	2	Changed featured.
+8	2013-04-26 16:30:16.030454-07	1	9	2	Indian Rock -- East Bay -- CA	2	Deleted area photo "Indian Rock -- East Bay -- CA-G".
+9	2013-04-26 16:30:46.789702-07	1	9	2	Indian Rock -- East Bay -- CA	2	Added area photo "Indian Rock -- East Bay -- CA-G".
+10	2013-04-26 16:35:29.05304-07	1	9	2	Indian Rock -- East Bay -- CA	2	Deleted area photo "Indian Rock -- East Bay -- CA-G".
+11	2013-04-26 16:35:41.815387-07	1	9	2	Indian Rock -- East Bay -- CA	2	Added area photo "Indian Rock -- East Bay -- CA-G".
+12	2013-04-26 16:43:12.394051-07	1	9	4	Mortar Rock -- East Bay -- CA	1	
+13	2013-04-26 16:45:14.214535-07	1	9	4	Mortar Rock -- East Bay -- CA	2	Added area photo "Mortar Rock -- East Bay -- CA-G".
+14	2013-04-26 16:45:35.038256-07	1	9	4	Mortar Rock -- East Bay -- CA	2	No fields changed.
+15	2013-04-26 16:59:48.204708-07	1	10	1	Slab -- Warm-up Wall -- Indian Rock -- CA	2	Changed featured. Added problem photo "Slab -- Warm-up Wall -- Indian Rock -- CA-O".
+16	2013-04-26 17:00:58.8468-07	1	10	1	Slab -- Warm-up Wall -- Indian Rock -- CA	2	Deleted problem photo "Slab -- Warm-up Wall -- Indian Rock -- CA-O".
+17	2013-04-26 17:02:43.903632-07	1	10	1	Slab -- Warm-up Wall -- Indian Rock -- CA	2	Added problem photo "Slab -- Warm-up Wall -- Indian Rock -- CA-O".
+18	2013-04-26 17:03:53.31076-07	1	10	1	Slab -- Warm-up Wall -- Indian Rock -- CA	2	Added problem photo "Slab -- Warm-up Wall -- Indian Rock -- CA-G". Added problem photo "Slab -- Warm-up Wall -- Indian Rock -- CA-G". Added problem photo "Slab -- Warm-up Wall -- Indian Rock -- CA-G".
+19	2013-04-26 17:06:13.154266-07	1	10	1	Slab -- Warm-up Wall -- Indian Rock -- CA	2	Deleted problem photo "Slab -- Warm-up Wall -- Indian Rock -- CA-G". Deleted problem photo "Slab -- Warm-up Wall -- Indian Rock -- CA-G". Deleted problem photo "Slab -- Warm-up Wall -- Indian Rock -- CA-G".
+20	2013-04-26 17:09:46.432702-07	1	10	1	Slab -- Warm-up Wall -- Indian Rock -- CA	2	Added problem photo "Slab -- Warm-up Wall -- Indian Rock -- CA-G". Added problem photo "Slab -- Warm-up Wall -- Indian Rock -- CA-G". Added problem photo "Slab -- Warm-up Wall -- Indian Rock -- CA-G".
+21	2013-04-26 17:12:22.939021-07	1	10	1	Slab -- Warm-up Wall -- Indian Rock -- CA	3	
+22	2013-04-26 17:14:28.233279-07	1	10	3	Slab -- Warm-up Wall -- Indian Rock -- CA	1	
+23	2013-04-28 09:34:55.057483-07	1	9	5	North Bay -- CA	1	
+24	2013-04-29 20:16:23.700128-07	1	9	8	tester -- AL	1	
+25	2013-04-29 20:17:56.150911-07	1	9	11	What -- AA	1	
+26	2013-04-29 20:23:16.707064-07	1	9	13	Region Test -- CO	1	
+27	2013-04-29 20:33:04.124393-07	1	9	19	test boulder -- Indian Rock -- East Bay -- AK	1	
+28	2013-04-29 20:35:50.817051-07	1	9	25	area test -- Mortar Rock -- AS	1	
+29	2013-04-29 20:37:01.529849-07	1	9	28	boulder test -- area test -- Mortar Rock -- AZ	1	
+30	2013-04-29 20:40:03.370665-07	1	9	32	area test -- North Bay -- AS	1	
+31	2013-04-29 20:40:24.055121-07	1	9	33	region test -- ID	1	
+32	2013-04-29 20:40:38.142751-07	1	9	34	region test -- GU	1	
+33	2013-04-29 20:41:34.50085-07	1	9	36	boulder test -- area test -- North Bay -- WA	1	
+34	2013-04-29 20:41:54.846459-07	1	9	36	boulder test -- area test -- North Bay -- WA	3	
+35	2013-04-29 20:41:54.850277-07	1	9	34	region test -- GU	3	
+36	2013-04-29 20:41:54.85793-07	1	9	33	region test -- ID	3	
+37	2013-04-29 20:41:54.860983-07	1	9	32	area test -- North Bay -- AS	3	
+38	2013-04-29 20:41:54.866215-07	1	9	28	boulder test -- area test -- Mortar Rock -- AZ	3	
+39	2013-04-29 20:41:54.869579-07	1	9	25	area test -- Mortar Rock -- AS	3	
+40	2013-04-29 20:41:54.874629-07	1	9	19	test boulder -- Indian Rock -- East Bay -- AK	3	
+41	2013-04-29 20:41:54.877616-07	1	9	13	Region Test -- CO	3	
+42	2013-04-29 20:41:54.87912-07	1	9	11	What -- AA	3	
+43	2013-04-29 20:41:54.882918-07	1	9	8	tester -- AL	3	
+44	2013-04-30 14:42:17.212322-07	1	9	37	Area -- Ring Mountain -- North Bay	1	
+45	2013-04-30 21:51:43.123641-07	1	9	37	Area -- Ring Mountain -- North Bay	2	Changed longitude, latitude, approach_description, trailhead_longitude, trailhead_latitude, parking_longitude, parking_latitude, parking_description, short_description, about, description, rock_type, weather_description, climbing_season, misc_information, pet_friendly, nearest_emergency and nearest_emergency_address.
+46	2013-04-30 21:52:38.145179-07	1	9	37	Area -- Ring Mountain -- North Bay	2	No fields changed.
+47	2013-05-01 10:06:35.889783-07	1	9	37	Area -- Ring Mountain -- North Bay	2	Changed nearest_emergency_phone.
+48	2013-05-01 10:06:45.896257-07	1	9	37	Area -- Ring Mountain -- North Bay	2	Changed nearest_emergency_phone.
+49	2013-05-08 20:34:17.119939-07	1	9	38	Region -- Vacaville Boulders	1	
+50	2013-05-08 20:38:02.245528-07	1	9	39	Boulder -- Turtle Rock -- Ring Mountain -- North Bay	1	
+51	2013-05-08 20:38:22.708479-07	1	9	39	Boulder -- Turtle Rock -- Ring Mountain -- North Bay	2	No fields changed.
+52	2013-05-08 20:39:34.037744-07	1	9	40	Boulder -- Turtle Rock -- Ring Mountain -- North Bay	1	
+53	2013-05-08 20:39:36.534573-07	1	9	40	Boulder -- Turtle Rock -- Ring Mountain -- North Bay	2	No fields changed.
+54	2013-05-08 20:40:02.947094-07	1	9	41	Area -- Woodcrest Boulders -- Vacaville Boulders	1	
+55	2013-05-08 20:40:41.88774-07	1	9	42	Boulder -- Pegboard Wall -- Indian Rock -- East Bay	1	
+56	2013-05-08 20:44:09.00386-07	1	9	43	Region -- Oahu	1	
+57	2013-05-08 20:45:15.624603-07	1	9	40	Boulder -- Turtle Rock -- Ring Mountain -- North Bay	3	
+58	2013-05-08 20:48:49.7545-07	1	9	44	Area -- Wa'ahila Ridge -- Oahu	1	
+59	2013-05-08 20:55:02.634311-07	1	9	45	Boulder -- Bloody Madness -- Woodcrest Boulders -- Vacaville Boulders	1	
+60	2013-05-08 20:55:06.654796-07	1	9	45	Boulder -- Bloody Madness -- Woodcrest Boulders -- Vacaville Boulders	2	No fields changed.
+61	2013-05-08 20:55:25.693113-07	1	9	46	Area -- Waimea Bay -- Oahu	1	
+62	2013-05-08 21:02:35.195786-07	1	9	47	Area -- Nuuanu Boulders -- Oahu	1	
+63	2013-05-08 21:08:55.164161-07	1	9	42	Boulder -- Pegboard Wall -- Indian Rock -- East Bay	2	Changed city, longitude, latitude, bouldering, approach_difficulty, approach_time, height, about, description, hazard_information and pet_friendly.
+64	2013-05-08 21:09:14.592148-07	1	9	48	Boulder -- The Pit -- Indian Rock -- East Bay	1	
+65	2013-05-08 21:12:34.648917-07	1	9	49	Boulder -- Front crack rock -- Indian Rock -- East Bay	1	
+66	2013-05-08 21:12:59.746622-07	1	9	50	Boulder -- Waimea Wall -- Waimea Bay -- Oahu	1	
+67	2013-05-08 21:14:32.726987-07	1	9	51	Boulder -- Hand Traverse -- Mortar Rock -- East Bay	1	
+68	2013-05-08 21:15:54.232447-07	1	9	52	Boulder -- Lil Halfdome -- Mortar Rock -- East Bay	1	
+69	2013-05-08 21:16:04.274643-07	1	9	53	Boulder -- The Corner -- Indian Rock -- East Bay	1	
+70	2013-05-08 21:18:08.17887-07	1	9	54	Boulder -- Mortar Rock -- Mortar Rock -- East Bay	1	
+71	2013-05-08 21:18:15.534432-07	1	9	55	Boulder -- East Traverse -- Indian Rock -- East Bay	1	
+72	2013-05-08 21:22:17.801294-07	1	10	4	Bloody Madness -- Bloody Madness -- Woodcrest Boulders -- CA	1	
+73	2013-05-08 21:23:35.355105-07	1	10	5	Mantle practice -- The Pit -- Indian Rock -- CA	1	
+74	2013-05-08 21:27:32.714812-07	1	10	6	Pegboard -- Pegboard Wall -- Indian Rock -- CA	1	
+75	2013-05-08 21:29:42.157638-07	1	10	7	Pegboard Arete -- Pegboard Wall -- Indian Rock -- CA	1	
+76	2013-05-08 21:30:45.347247-07	1	10	8	Transportation crack -- The Pit -- Indian Rock -- CA	1	
+77	2013-05-08 21:36:00.987493-07	1	10	9	Warm-up traverse -- Warm-up Wall -- Indian Rock -- CA	1	
+78	2013-05-08 21:36:36.861036-07	1	10	10	Black Plague -- Mortar Rock -- East Bay -- CA	1	
+79	2013-05-08 21:37:01.958718-07	1	10	11	C+ Dyno -- The Pit -- Indian Rock -- CA	1	
+80	2013-05-08 21:37:59.422149-07	1	10	12	The crack -- Front crack rock -- Indian Rock -- CA	1	
+81	2013-05-08 21:38:40.427644-07	1	10	11	C+ Dyno -- The Pit -- Indian Rock -- CA	2	Changed description, height, angle, features, location, problem_start and problem_descent.
+82	2013-05-08 21:48:09.73064-07	1	10	13	Groove Tube -- Waimea Wall -- Waimea Bay -- HI	1	
+83	2013-05-08 21:48:13.123344-07	1	10	13	Groove Tube -- Waimea Wall -- Waimea Bay -- HI	2	No fields changed.
+84	2013-05-08 21:54:45.059387-07	1	10	14	Little prow -- Front crack rock -- Indian Rock -- CA	1	
+85	2013-05-08 21:56:05.155626-07	1	10	15	Front left -- Front crack rock -- Indian Rock -- CA	1	
+86	2013-05-08 21:57:23.614378-07	1	10	16	Beginners' Slab -- The Corner -- Indian Rock -- CA	1	
+87	2013-05-08 21:57:54.400238-07	1	10	17	Easy ape -- The Corner -- Indian Rock -- CA	1	
+88	2013-05-08 21:59:26.634231-07	1	10	18	Ape overhang -- The Corner -- Indian Rock -- CA	1	
+89	2013-05-08 21:59:58.641715-07	1	10	19	Ape traverse -- The Corner -- Indian Rock -- CA	1	
+90	2013-05-08 22:01:33.860517-07	1	10	20	Watercourse -- The Pit -- Indian Rock -- CA	1	
+91	2013-05-08 22:01:55.79541-07	1	10	21	Southpaw -- Waimea Wall -- Waimea Bay -- HI	1	
+92	2013-05-08 22:03:56.456254-07	1	10	22	Kitty Cat -- Waimea Wall -- Waimea Bay -- HI	1	
+93	2013-05-08 22:09:37.363098-07	1	10	23	The Overhang -- The Pit -- Indian Rock -- CA	1	
+94	2013-05-08 22:10:56.39339-07	1	10	24	Center Overhang -- The Pit -- Indian Rock -- CA	1	
+95	2013-05-08 22:12:09.588733-07	1	10	25	Right Overhang -- The Pit -- Indian Rock -- CA	1	
+96	2013-05-08 22:13:12.777065-07	1	10	26	Finger Machine Traverse -- Waimea Wall -- Waimea Bay -- HI	1	
+97	2013-05-08 22:14:51.599201-07	1	10	27	Easy Overhang -- The Pit -- Indian Rock -- CA	1	
+98	2013-05-08 22:16:25.973507-07	1	10	28	Embryonic Journey -- The Pit -- Indian Rock -- CA	1	
+99	2013-05-11 00:17:12.047488-07	1	10	29	Double Dyno -- The Pit -- Indian Rock -- CA	1	
+100	2013-05-11 00:18:53.137972-07	1	10	29	Double Dyno -- The Pit -- Indian Rock -- CA	2	Changed quality, description, height, features, location and problem_start.
+101	2013-05-11 00:20:29.985126-07	1	10	30	Beginners' crack -- The Pit -- Indian Rock -- CA	1	
+102	2013-05-11 00:21:29.951139-07	1	10	31	Beginners' face -- The Pit -- Indian Rock -- CA	1	
+103	2013-05-11 00:21:52.62312-07	1	10	32	37.89331 -- Mortar Rock -- East Bay -- CA	1	
+104	2013-05-11 00:23:10.458981-07	1	10	32	Bench Wall Crack -- Mortar Rock -- East Bay -- CA	2	Changed name, quality, longitude, description, location, problem_start and landing_information.
+105	2013-05-11 00:23:14.954066-07	1	10	32	Bench Wall Crack -- Mortar Rock -- East Bay -- CA	2	No fields changed.
+106	2013-05-11 00:23:42.828583-07	1	10	33	The Bench Wall -- Mortar Rock -- East Bay -- CA	1	
+107	2013-05-11 00:23:55.202463-07	1	10	33	The Bench Wall -- Mortar Rock -- East Bay -- CA	2	Changed longitude.
+108	2013-05-11 00:24:08.087911-07	1	10	33	The Bench Wall -- Mortar Rock -- East Bay -- CA	2	Changed features.
+109	2013-05-11 00:24:49.872495-07	1	10	33	The Bench Wall -- Mortar Rock -- East Bay -- CA	2	Changed description, location and landing_information.
+110	2013-05-11 00:25:06.655782-07	1	10	34	Lil Halfdome Middle -- Lil Halfdome -- Mortar Rock -- CA	1	
+111	2013-05-11 00:25:27.231397-07	1	10	34	Lil Halfdome Middle -- Lil Halfdome -- Mortar Rock -- CA	2	Changed longitude, latitude and height.
+112	2013-05-11 00:25:59.111081-07	1	10	34	Lil Halfdome Middle -- Lil Halfdome -- Mortar Rock -- CA	2	Changed description, location and problem_start.
+113	2013-05-11 00:26:57.892546-07	1	10	35	The Hand Traverse -- Mortar Rock -- East Bay -- CA	1	
+114	2013-05-11 00:27:35.817433-07	1	10	35	The Hand Traverse -- Mortar Rock -- East Bay -- CA	2	Changed description, problem_start and variations.
+115	2013-05-11 00:28:47.862031-07	1	10	36	The Mossy Arete -- Hand Traverse -- Mortar Rock -- CA	1	
+116	2013-05-11 00:28:57.498475-07	1	10	35	The Hand Traverse -- Hand Traverse -- Mortar Rock -- CA	2	Changed parent.
+117	2013-05-11 00:29:44.66616-07	1	10	36	The Mossy Arete -- Hand Traverse -- Mortar Rock -- CA	2	Changed description, location, problem_start and landing_information.
+118	2013-05-11 00:31:12.257488-07	1	10	37	Traverse -- Wa'ahila Ridge -- Oahu -- HI	1	
+119	2013-05-11 00:31:29.170867-07	1	10	26	Finger Machine Traverse -- Waimea Wall -- Waimea Bay -- HI	2	No fields changed.
+120	2013-05-31 00:13:22.029956-07	1	9	3	Boulder -- Warm-up Wall -- Indian Rock -- East Bay	2	Changed parking_type and parking_description.
+121	2013-05-31 22:38:58.88055-07	1	9	3	Boulder -- Warm-up Wall -- Indian Rock -- East Bay	2	Changed street_parking, garage_parking and pullout_parking.
+122	2013-06-01 00:33:32.305428-07	1	10	37	Traverse -- Wa'ahila Ridge -- Oahu -- HI	2	Changed height.
+123	2013-06-01 00:33:42.586684-07	1	10	37	Traverse -- Wa'ahila Ridge -- Oahu -- HI	2	Changed height.
+124	2013-06-01 00:40:53.903425-07	1	9	55	Boulder -- East Traverse -- Indian Rock -- East Bay	2	Changed height.
+125	2013-06-01 00:41:05.257303-07	1	9	55	Boulder -- East Traverse -- Indian Rock -- East Bay	2	Changed height.
+126	2013-06-01 16:50:37.766754-07	1	10	25	Right Overhang -- The Pit -- Indian Rock -- CA	2	Changed longitude and latitude.
+\.
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: superbeta
+--
+
+SELECT pg_catalog.setval('django_admin_log_id_seq', 126, true);
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: superbeta
+--
+
+COPY django_content_type (id, name, app_label, model) FROM stdin;
+1	permission	auth	permission
+2	group	auth	group
+3	user	auth	user
+4	content type	contenttypes	contenttype
+5	session	sessions	session
+6	site	sites	site
+7	log entry	admin	logentry
+8	migration history	south	migrationhistory
+9	area	climbs	area
+10	problem	climbs	problem
+11	problem photo	climbs	problemphoto
+12	area photo	climbs	areaphoto
+13	parking	climbs	parking
+\.
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: superbeta
+--
+
+SELECT pg_catalog.setval('django_content_type_id_seq', 13, true);
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: superbeta
+--
+
+COPY django_session (session_key, session_data, expire_date) FROM stdin;
+9728b706d660366d9dec68c21584d3fa	Y2QxYWMyMGI0MjgwYzlkYTljOGU1OWFkMmIwZjlmYjI3YTlhY2UwNTqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2013-05-28 16:27:24.625913-07
+0f0c5ff0edf3127fbb0b66570eb9495c	Y2QxYWMyMGI0MjgwYzlkYTljOGU1OWFkMmIwZjlmYjI3YTlhY2UwNTqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2013-05-09 00:58:54.435471-07
+7a564a8d7f6db0c4f66e5b07d8509ff0	Y2QxYWMyMGI0MjgwYzlkYTljOGU1OWFkMmIwZjlmYjI3YTlhY2UwNTqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2013-05-10 15:22:47.177313-07
+e18d7f24ad84e377edfb5cc91d17fc9f	Y2QxYWMyMGI0MjgwYzlkYTljOGU1OWFkMmIwZjlmYjI3YTlhY2UwNTqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2013-05-11 23:33:22.246275-07
+bd524eae2174d7b1598662a67f2f6c72	Y2QxYWMyMGI0MjgwYzlkYTljOGU1OWFkMmIwZjlmYjI3YTlhY2UwNTqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2013-05-13 20:03:24.659668-07
+2515739b8cf3109b1f8331f7593ed697	Y2QxYWMyMGI0MjgwYzlkYTljOGU1OWFkMmIwZjlmYjI3YTlhY2UwNTqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2013-05-22 20:04:58.532785-07
+7577e11634a8eaf122833ffd2a95b17d	MDY5ZDJmMjczMDgyNWRjY2Q1MGZlNzg0ZWFjMTMzMDRiYzYwNTA0NTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2013-05-22 20:24:24.276297-07
+b9a620caec944cc1a07b3f14ba0e6406	MDY5ZDJmMjczMDgyNWRjY2Q1MGZlNzg0ZWFjMTMzMDRiYzYwNTA0NTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2013-05-22 20:28:38.802528-07
+6eeecdf0dab6cce183c948fa7a37f7e9	MDY5ZDJmMjczMDgyNWRjY2Q1MGZlNzg0ZWFjMTMzMDRiYzYwNTA0NTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2013-05-23 00:00:11.006072-07
+43de7375b22e3463c44390c7d8522b7c	MDY5ZDJmMjczMDgyNWRjY2Q1MGZlNzg0ZWFjMTMzMDRiYzYwNTA0NTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2013-05-23 01:16:22.93136-07
+ff9806705ce608053d509eb98a4e0f12	Y2QxYWMyMGI0MjgwYzlkYTljOGU1OWFkMmIwZjlmYjI3YTlhY2UwNTqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2013-05-23 22:14:52.732602-07
+46688c80b8ad7da87a8895bd3bf38607	Y2QxYWMyMGI0MjgwYzlkYTljOGU1OWFkMmIwZjlmYjI3YTlhY2UwNTqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2013-06-14 00:09:14.265212-07
+\.
+
+
+--
+-- Data for Name: django_site; Type: TABLE DATA; Schema: public; Owner: superbeta
+--
+
+COPY django_site (id, domain, name) FROM stdin;
+1	example.com	example.com
+\.
+
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE SET; Schema: public; Owner: superbeta
+--
+
+SELECT pg_catalog.setval('django_site_id_seq', 1, true);
+
+
+--
+-- Data for Name: south_migrationhistory; Type: TABLE DATA; Schema: public; Owner: superbeta
+--
+
+COPY south_migrationhistory (id, app_name, migration, applied) FROM stdin;
+1	climbs	0001_initial	2013-06-01 00:05:31.776134-07
+2	climbs	0002_auto__add_field_problem_height_string	2013-06-01 00:29:43.293824-07
+3	climbs	0003_change_boulder_height_to_string	2013-06-01 00:29:43.520653-07
+4	climbs	0004_auto__del_field_problem_height_string__chg_field_problem_height	2013-06-01 00:29:43.57599-07
+5	climbs	0005_auto__add_field_area_height_string	2013-06-01 00:40:13.511859-07
+6	climbs	0006_convert_area_height_to_string	2013-06-01 00:40:13.63628-07
+7	climbs	0007_auto__del_field_area_height_string__chg_field_area_height	2013-06-01 00:40:13.714394-07
+8	climbs	0008_auto__chg_field_area_nearest_emergency_address__chg_field_area_parking	2013-06-01 00:45:58.756687-07
+9	climbs	0009_auto__add_field_area_spring__add_field_area_summer__add_field_area_fal	2013-06-01 00:59:44.888646-07
+10	climbs	0010_convert_climbingseason_to_checkbox	2013-06-01 00:59:44.949822-07
+11	climbs	0011_auto__del_field_area_climbing_season__del_field_area_word__add_field_a	2013-06-01 00:59:45.314337-07
+\.
+
+
+--
+-- Name: south_migrationhistory_id_seq; Type: SEQUENCE SET; Schema: public; Owner: superbeta
+--
+
+SELECT pg_catalog.setval('south_migrationhistory_id_seq', 11, true);
+
+
+--
+-- Name: auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions_group_id_permission_id_key; Type: CONSTRAINT; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_key UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission_content_type_id_codename_key; Type: CONSTRAINT; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_key UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups_user_id_group_id_key; Type: CONSTRAINT; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_group_id_key UNIQUE (user_id, group_id);
+
+
+--
+-- Name: auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions_user_id_permission_id_key; Type: CONSTRAINT; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_permission_id_key UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_username_key UNIQUE (username);
+
+
+--
+-- Name: climbs_area_pkey; Type: CONSTRAINT; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+ALTER TABLE ONLY climbs_area
+    ADD CONSTRAINT climbs_area_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: climbs_areaphoto_pkey; Type: CONSTRAINT; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+ALTER TABLE ONLY climbs_areaphoto
+    ADD CONSTRAINT climbs_areaphoto_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: climbs_problem_pkey; Type: CONSTRAINT; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+ALTER TABLE ONLY climbs_problem
+    ADD CONSTRAINT climbs_problem_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: climbs_problemphoto_pkey; Type: CONSTRAINT; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+ALTER TABLE ONLY climbs_problemphoto
+    ADD CONSTRAINT climbs_problemphoto_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type_app_label_model_key; Type: CONSTRAINT; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_key UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+ALTER TABLE ONLY django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: django_site_pkey; Type: CONSTRAINT; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+ALTER TABLE ONLY django_site
+    ADD CONSTRAINT django_site_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: south_migrationhistory_pkey; Type: CONSTRAINT; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+ALTER TABLE ONLY south_migrationhistory
+    ADD CONSTRAINT south_migrationhistory_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_permissions_group_id; Type: INDEX; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE INDEX auth_group_permissions_group_id ON auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id; Type: INDEX; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE INDEX auth_group_permissions_permission_id ON auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id; Type: INDEX; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE INDEX auth_permission_content_type_id ON auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: auth_user_groups_group_id; Type: INDEX; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE INDEX auth_user_groups_group_id ON auth_user_groups USING btree (group_id);
+
+
+--
+-- Name: auth_user_groups_user_id; Type: INDEX; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE INDEX auth_user_groups_user_id ON auth_user_groups USING btree (user_id);
+
+
+--
+-- Name: auth_user_user_permissions_permission_id; Type: INDEX; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE INDEX auth_user_user_permissions_permission_id ON auth_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_user_user_permissions_user_id; Type: INDEX; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE INDEX auth_user_user_permissions_user_id ON auth_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: climbs_area_area_parent_id; Type: INDEX; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE INDEX climbs_area_area_parent_id ON climbs_area USING btree (area_parent_id);
+
+
+--
+-- Name: climbs_area_slug; Type: INDEX; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE INDEX climbs_area_slug ON climbs_area USING btree (slug);
+
+
+--
+-- Name: climbs_area_slug_like; Type: INDEX; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE INDEX climbs_area_slug_like ON climbs_area USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: climbs_areaphoto_area_id; Type: INDEX; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE INDEX climbs_areaphoto_area_id ON climbs_areaphoto USING btree (area_id);
+
+
+--
+-- Name: climbs_problem_parent_id; Type: INDEX; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE INDEX climbs_problem_parent_id ON climbs_problem USING btree (parent_id);
+
+
+--
+-- Name: climbs_problem_slug; Type: INDEX; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE INDEX climbs_problem_slug ON climbs_problem USING btree (slug);
+
+
+--
+-- Name: climbs_problem_slug_like; Type: INDEX; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE INDEX climbs_problem_slug_like ON climbs_problem USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: climbs_problemphoto_problem_id; Type: INDEX; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE INDEX climbs_problemphoto_problem_id ON climbs_problemphoto USING btree (problem_id);
+
+
+--
+-- Name: django_admin_log_content_type_id; Type: INDEX; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE INDEX django_admin_log_content_type_id ON django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id; Type: INDEX; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE INDEX django_admin_log_user_id ON django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_expire_date; Type: INDEX; Schema: public; Owner: superbeta; Tablespace: 
+--
+
+CREATE INDEX django_session_expire_date ON django_session USING btree (expire_date);
+
+
+--
+-- Name: area_id_refs_id_3c395dce; Type: FK CONSTRAINT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY climbs_areaphoto
+    ADD CONSTRAINT area_id_refs_id_3c395dce FOREIGN KEY (area_id) REFERENCES climbs_area(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: area_parent_id_refs_id_10c3cd1b; Type: FK CONSTRAINT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY climbs_area
+    ADD CONSTRAINT area_parent_id_refs_id_10c3cd1b FOREIGN KEY (area_parent_id) REFERENCES climbs_area(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: area_parent_id_refs_id_ef3c32e5; Type: FK CONSTRAINT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY climbs_area
+    ADD CONSTRAINT area_parent_id_refs_id_ef3c32e5 FOREIGN KEY (area_parent_id) REFERENCES climbs_area(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions_permission_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_permission_id_fkey FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_group_id_fkey FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions_permission_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_permission_id_fkey FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: climbs_areaphoto_area_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY climbs_areaphoto
+    ADD CONSTRAINT climbs_areaphoto_area_id_fkey FOREIGN KEY (area_id) REFERENCES climbs_area(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: climbs_problem_parent_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY climbs_problem
+    ADD CONSTRAINT climbs_problem_parent_id_fkey FOREIGN KEY (parent_id) REFERENCES climbs_area(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: climbs_problemphoto_problem_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY climbs_problemphoto
+    ADD CONSTRAINT climbs_problemphoto_problem_id_fkey FOREIGN KEY (problem_id) REFERENCES climbs_problem(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: content_type_id_refs_id_728de91f; Type: FK CONSTRAINT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT content_type_id_refs_id_728de91f FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log_content_type_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_fkey FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: group_id_refs_id_3cea63fe; Type: FK CONSTRAINT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT group_id_refs_id_3cea63fe FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: parent_id_refs_id_48936348; Type: FK CONSTRAINT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY climbs_problem
+    ADD CONSTRAINT parent_id_refs_id_48936348 FOREIGN KEY (parent_id) REFERENCES climbs_area(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: problem_id_refs_id_3f5b0a62; Type: FK CONSTRAINT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY climbs_problemphoto
+    ADD CONSTRAINT problem_id_refs_id_3f5b0a62 FOREIGN KEY (problem_id) REFERENCES climbs_problem(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_id_refs_id_7ceef80f; Type: FK CONSTRAINT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT user_id_refs_id_7ceef80f FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_id_refs_id_831107f1; Type: FK CONSTRAINT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT user_id_refs_id_831107f1 FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_id_refs_id_dfbab7d; Type: FK CONSTRAINT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT user_id_refs_id_dfbab7d FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_id_refs_id_f2045483; Type: FK CONSTRAINT; Schema: public; Owner: superbeta
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT user_id_refs_id_f2045483 FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
