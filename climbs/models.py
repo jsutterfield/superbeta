@@ -139,11 +139,12 @@ class Problem(models.Model):
 
     def region(self):
         return self.parent.area_parent.area_parent.name
-    area.admin_order_field = 'parent__area_parent__area_parent__name'
+    region.admin_order_field = 'parent__area_parent__area_parent__name'
 
     def state(self):
         return self.parent.state
-    area.admin_order_field = 'parent__state'
+    state.admin_order_field = 'parent__state'
+    
     def validate_rating(self):
         pass
 
