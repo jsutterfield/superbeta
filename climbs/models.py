@@ -65,13 +65,7 @@ class Area(models.Model):
     featured = models.BooleanField(default=False)
 
     def __unicode__(self):
-        if self.area_type == 'RE':
-            return "%s -- %s" % (self.get_area_type_display(), self.name)
-        elif self.area_type == 'AR':
-            return "%s -- %s -- %s" % (self.get_area_type_display(), self.name, self.area_parent.name)
-        else:
-            return "%s -- %s -- %s -- %s" % (self.get_area_type_display(), self.name, self.area_parent.name, 
-                                             self.area_parent.area_parent.name)
+        return "%s" % self.get_area_type_display()
 
     def get_absolute_url(self):
         if self.area_type == 'RE':
@@ -82,6 +76,9 @@ class Area(models.Model):
             return "climbs/%s/%s/%s" % (self.area_parent.area_parent.slug,
                                         self.area_parent.slug,
                                         self.slug)
+
+    class Meta:
+        ordering = ['area_type', 'name']
 
     
 class Problem(models.Model):
@@ -125,16 +122,33 @@ class Problem(models.Model):
     slug = models.SlugField(max_length=50, help_text='Used in URL to map to database to this route')
 
     def __unicode__(self):
-        return "%s -- %s -- %s -- %s" % (self.name, self.parent.name,
-                                         self.parent.area_parent.name, self.parent.state)
+        return "%s: %s, %s" % (self.name, self.parent.area_parent.name, self.parent.state)
 
     def get_absolute_url(self):
         return "/climbs/%s/%s/%s/%s" % (self.parent.area_parent.area_parent.slug,
                                         self.parent.area_parent.slug, 
                                         self.parent.slug, self.slug)
 
+    def boulder(self):
+        return self.parent.name
+    boulder.admin_order_field = 'parent'
+
+    def area(self):
+        return self.parent.area_parent.name
+    area.admin_order_field = 'parent__area_parent__name'
+
+    def region(self):
+        return self.parent.area_parent.area_parent.name
+    area.admin_order_field = 'parent__area_parent__area_parent__name'
+
+    def state(self):
+        return self.parent.state
+    area.admin_order_field = 'parent__state'
     def validate_rating(self):
         pass
+
+    class Meta:
+        ordering = ['name']
 
 
 class ProblemPhoto(models.Model):

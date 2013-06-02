@@ -34,6 +34,9 @@ class AreaAdmin(admin.ModelAdmin):
     inlines = [
         AreaPhotoInline
     ]
+    list_display = ('name', 'area_type', 'state')
+    list_filter = ('area_type', 'featured')
+    search_fields = ['name', 'area_type']
 
 
 class ProblemAdmin(admin.ModelAdmin):
@@ -41,6 +44,11 @@ class ProblemAdmin(admin.ModelAdmin):
     inlines = [
         ProblemPhotoInline
     ]
+    list_filter = ('featured', 'quality') 
+    list_display = ('name', 'boulder', 'area', 'region', 'state')
+    search_fields = ['name']
+
+
 
 admin.site.register(Area, AreaAdmin)
 admin.site.register(Problem, ProblemAdmin)
