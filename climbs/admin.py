@@ -40,6 +40,21 @@ class AreaAdmin(admin.ModelAdmin):
 
 
 class ProblemAdmin(admin.ModelAdmin):
+
+    fieldsets = [
+        ("General Info", {'fields': ['name', 'parent', 'featured', 'grade', 
+                                     'quality',]}),
+        ('Features', {'fields': ['cracks', 'crimps', 'jugs', 'slopers', 'sidepulls',
+                                 'pockets', 'pinches', 'compression', 'dynos', 
+                                 'highball', 'mantle', 'arete']}),
+        ('Other Info', {'fields': ['description', 'about', 'location',
+                                   'short_description', 'height', 'angle',
+                                   'problem_start', 'problem_finish', 'problem_descent', 'landing_information',
+                                   'variations', 'hazard_information', 'misc_information',
+                                   'longitude', 'latitude', 'aspect', 'source', 'first_ascent',
+                                   'slug']})
+        ]
+        
     prepopulated_fields = {"slug": ("name",)}
     inlines = [
         ProblemPhotoInline

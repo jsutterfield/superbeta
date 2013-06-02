@@ -122,6 +122,7 @@ class Problem(models.Model):
     about = models.TextField(blank=True)
     location = models.CharField(max_length=100, blank=True)
     problem_start = models.CharField(max_length=100, blank=True)
+    problem_finish = models.CharField(max_length=100, blank=True)
     problem_descent = models.CharField(max_length=100, blank=True)
     landing_information = models.CharField(max_length=100, blank=True)
     hazard_information = models.CharField(max_length=100, blank=True)
