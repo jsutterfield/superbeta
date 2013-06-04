@@ -15,6 +15,10 @@ def get_forecast(lat=None, lon=None, city=None, state=None, zipcode=None):
         return
 
     fp = requests.get("http://api.wunderground.com/api/{0}/conditions/forecast/q/{1}.json".format(API_KEY, query))
+
+    # Check if this request goes through before converiting it to json
+    # Also set a timeout
+
     json = fp.json()
     weather = {'today': {'temp': None, 'icon': None, 'day': None},
                'tomorrow': {'temp': None, 'icon': None, 'day': None},
