@@ -675,6 +675,22 @@ footer div div h4 {
   font-weight: bold;
 }
 
+.facebook, .twitter {
+  background-repeat: no-repeat;
+  background-size: 20px;
+  padding-left: 30px;
+  margin-left: -10px;
+  color: white;
+}
+
+.facebook {
+  background-image: url('../images/fb_logo.png');
+}
+
+.twitter {
+  background-image: url('../images/twitter_logo.png');
+}
+
 /***NIVO SLIDER*************************************/
 .nivoSlider {
     position:relative;
@@ -692,9 +708,7 @@ footer div div h4 {
     border:0;
     display:block;
 }
-
-/* For modern browsers */
-.cf:before,
+/* For modern browsers */ .cf:before,
 .cf:after {
     content:"";
     display:table;
