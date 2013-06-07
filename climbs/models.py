@@ -65,7 +65,7 @@ class Area(models.Model):
     featured = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return "%s" % self.get_area_type_display()
+        return "%s" % self.name
 
     def get_absolute_url(self):
         if self.area_type == 'RE':
