@@ -211,7 +211,6 @@ div.left-hero-photo {
 
 /***ROUTE*********************************************************/
 .route-pic-holder {
-  height:880px; 
   width:350px; 
   margin-top: 50px;
   margin-right: 25px;
@@ -219,23 +218,19 @@ div.left-hero-photo {
 }
 
 .route-pic-frame {
-  height: 604px;
-  width: 354px;
   background-color: #f6f6f6;
   margin-bottom: 15px;
+  padding-bottom: 7px;
 }
 
 .route-pic {
-  height: 590px;
-  width: 340px;
 }
 
 div.route-pic {
-  background-color: #e6e6e6;
+  width: 340px;
   position: relative;
   top: 5px;
   left: 5px;
-  border: 2px solid white;
 }
 
 .route-topo-pic-frame {

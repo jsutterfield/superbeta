@@ -2,14 +2,9 @@
 import os
 import socket
 
-if socket.gethostname() == 'jafaraf':
-    DEBUG = True
-    TEMPLATE_DEBUG = True
-else:
-    DEBUG = False
-    TEMPLATE_DEBUG = False
 DEBUG = True
 TEMPLATE_DEBUG = True
+THUMBNAIL_DEBUG = True
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -129,6 +124,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'climbs',
     'south',
+    'sorl.thumbnail',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -161,5 +157,12 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
     }
 }

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load paragraphs %}
+{% load thumbnail %}
 {% block content %}
   <div class='gray-overlay-holder cf'>
     <div class='three-featured-areas'>
@@ -33,7 +34,9 @@
         {% for photo in featured_photos %}
           {% if photo.photo_type == "O" %}
             <a href="{{ featured_problem.get_absolute_url }}">
-              <img src="{{ photo.photo.url }}" class='left-hero-photo'>
+                {% thumbnail photo.photo "160" as im %}
+                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                    {% endthumbnail %}
             </a>
           {% endif %}
         {% endfor %}
